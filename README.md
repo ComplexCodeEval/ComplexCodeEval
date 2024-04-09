@@ -67,6 +67,23 @@ This project aims to download projects from remote repositories based on the pro
 python3 -m dataset_extract
 ```
 
+### Output Example
+
+A default output example:
+- Three folders `./csv_files`, `./json_files`, and `./repositories` will be generated in the current directory.
+- The `./repositories` folder stores all projects from the remote repository information table, similar to the following image:  
+![Example of /repositories](example/image0.png)
+- The `./csv_files` folder stores the API call information for all projects in the remote repository information table. For each API specified in [setup/profile.yaml](setup/profile.yaml), `{language}_{API}_repo_acount.csv` and `{language}_{API}_repo_acount_analysis.csv` will be created, similar to the following images:  
+![Example of /csv_files](example/image1.png)
+  - Example of `{language}_{API}_repo_acount.csv`:  
+  ![Example of repo_acount](example/image2.png)
+  - Example of `{language}_{API}_repo_acount_analysis.csv`:  
+  ![Example of repo_acount_analysis](example/image3.png)
+- The `./json_files` folder stores the final datasets. For each API specified in [setup/profile.yaml](setup/profile.yaml), `{language}_{api}_comment_tested_API_1.json` will be created, similar to the following image:  
+![Example of /json_files](example/image4.png)
+  - Example of `{language}_{api}_comment_tested_API_1.json`:  
+  ![Example of comment_tested_API](example/image5.png)
+
 ### Configuration File
 
 The configuration file can be customized at [setup/profile.yaml](setup/profile.yaml).

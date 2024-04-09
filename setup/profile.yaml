@@ -6,7 +6,7 @@ json_path: ./json_files  # store the final dataset of each API
 
 xls_path: ./analysis_repo_dependency  # you need to provide the xls or xlsx file of the remote repository in this directory
 
-repo_path: ./repositories # store remote code repositories
+repo_path: /data/jiachen/java_api/demo_data # store remote code repositories
 
 # all paths are either absolute or relative to where the script runs
 

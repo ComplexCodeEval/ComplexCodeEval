@@ -44,7 +44,6 @@ def remove_intermediate_files(properties):
 def main():
     properties = read_profile()
     language = properties["language"]
-    return
     if language != "Java" and language != "Python":
         print("Invalid language")
         sys.exit(1)

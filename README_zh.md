@@ -68,6 +68,23 @@
 python3 -m dataset_extract
 ```
 
+### 输出示例
+
+一个默认的输出示例：
+- 会在当前目录下生成三个文件夹`./csv_files`、`./json_files`、`./repositories`。
+- `./repositories`存放了远程仓库信息表中的所有项目，类似于下图：  
+![/repositories示例](example/image0.png)
+- `./csv_files`存放了在远程仓库信息表中的所有项目的api调用情况，其中会为[setup/profile.yaml](setup/profile.yaml)中提供的所有需要提取的API分别创建一个`{language}_{API}_repo_acount.csv`和`{language}_{API}_repo_acount_analysis.csv`类似于下图：  
+![/csv_files示例](example/image1.png)
+  - `{language}_{API}_repo_acount.csv`的示例图如下：  
+  ![repo_acount示例](example/image2.png)
+  - `{language}_{API}_repo_acount_analysis.csv`的示例图如下：  
+  ![repo_acount_analysis示例](example/image3.png)
+- `./json_files`存放了最终数据集，其中会为[setup/profile.yaml](setup/profile.yaml)中提供的所有需要提取的API分别创建一个`{language}_{api}_comment_tested_API_1.json`，类似于下图：  
+![/json_files示例](example/image4.png)
+  - `{language}_{api}_comment_tested_API_1.json`的示例图如下：  
+  ![comment_tested_API示例](example/image5.png)
+
 ### 配置文件
 可自行更改配置文件[setup/profile.yaml](setup/profile.yaml)。
 
