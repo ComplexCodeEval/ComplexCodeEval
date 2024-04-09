@@ -6,51 +6,51 @@
 
 ### Java 数据集字段
 
-- `git_group`: 项目所在的 Git 分组或组织。
-- `git_name`: 项目在 Git 中的名称。
+- `git_group`: 存放项目的 Git 组织或组织。
+- `git_name`: Git 上项目的名称。
 - `version`: 项目的版本号。
 - `language`: 项目使用的编程语言。
 - `project_name`: 项目的名称。
 - `create_time`: 项目创建时间。
 - `update_time`: 项目最后更新时间。
-- `file_path`: 文件路径。
+- `file_path`: 源代码仓库中相关焦点类的文件路径。
 - `focal_module`: 项目的焦点模块。
 - `focal_package`: 项目的焦点包。
 - `focal_class`: 项目的焦点类。
-- `focal_name`: 焦点名称。
-- `focal_parameter`: 焦点参数列表。
-- `solution`: 解决方案。
-- `method_signature`: 方法签名。
-- `left_context`: 左侧上下文。
-- `right_context`: 右侧上下文。
-- `test_function`: 测试函数列表。
-- `class_comment`: 类注释。
-- `import_text`: 导入文本列表。
-- `prompt`: 提示信息。
-- `prompt_is_gen_from_api`: 提示信息是否由 API 生成。
+- `focal_name`: 项目的焦点方法名称。
+- `focal_parameter`: 项目的焦点方法参数列表。
+- `solution`: 相关问题的解决方案。注意，这直接来自原始源文件。根据下游任务的类型（代码补全或代码生成）和需要向模型提供的上下文量，用户可以采用和更新提示字段。
+- `method_signature`: 目标焦点方法的方法签名。
+- `left_context`: 焦点方法之前的源代码。
+- `right_context`: 焦点方法之后的源代码（括号结束后）。
+- `test_function`: 从原始源代码中提取的测试函数列表，对应于测试焦点方法。
+- `class_comment`: 焦点类的类注释。
+- `import_text`: 导入包的列表。
+- `prompt`: 可直接用于执行代码生成的提示消息。请注意，如果原始源代码没有代码注释，我们将使用 DeepSeekCoder 生成注释。我们用于生成代码注释的提示是：“总结以下使用 [框架] 的代码，并生成 [编程语言] 注释。响应应由两部分组成:描述以及块标签。块标签应包括 @param 和 @return。”
+- `prompt_is_gen_from_api`: true = 提示消息由 DeepSeekCoder API 生成；false = 提示消息是代码存储库中的原始代码注释。
 
 ### Python 数据集字段
 
-- `git_group`: 项目所在的 Git 分组或组织。
-- `git_name`: 项目在 Git 中的名称。
+- `git_group`: 存放项目的 Git 组织或组织。
+- `git_name`: Git 上项目的名称。
 - `version`: 项目的版本号。
 - `language`: 项目使用的编程语言。
 - `project_name`: 项目的名称。
 - `create_time`: 项目创建时间。
 - `update_time`: 项目最后更新时间。
-- `file_path`: 文件路径。
-- `file_name`: 文件名。
+- `file_path`: 源代码仓库中相关焦点类的文件路径。
+- `file_name`: 文件名称。
 - `focal_class`: 项目的焦点类。
-- `focal_name`: 焦点名称。
-- `focal_parameter`: 焦点参数列表。
-- `solution`: 解决方案。
-- `function_signature`: 函数签名。
-- `left_context`: 左侧上下文。
-- `right_context`: 右侧上下文。
-- `test_function`: 测试函数列表。
-- `import_text`: 导入文本列表。
-- `prompt`: 提示信息。
-- `prompt_is_gen_from_api`: 提示信息是否由 API 生成。
+- `focal_name`: 项目的焦点函数名称。
+- `focal_parameter`: 项目的焦点函数参数列表。
+- `solution`: 相关问题的解决方案。注意，这直接来自原始源文件。根据下游任务的类型（代码补全或代码生成）和需要向模型提供的上下文量，用户可以采用和更新提示字段。
+- `function_signature`: 目标焦点函数的函数签名。
+- `left_context`: 焦点函数之前的源代码。
+- `right_context`: 焦点函数之后的源代码（括号结束后）。
+- `test_function`: 从原始源代码中提取的测试函数列表，对应于测试焦点方法。
+- `import_text`: 导入文本的列表。
+- `prompt`: 可直接用于执行代码生成的提示消息。请注意，如果原始源代码没有代码注释，我们将使用 DeepSeekCoder 生成注释。我们用于生成代码注释的提示是：“总结以下使用 [框架] 的代码，并生成 [编程语言] 注释。响应应由两部分组成：描述以及块标签。块标签应包括 @param 和 @return。”
+- `prompt_is_gen_from_api`: true = 提示消息由 DeepSeekCoder API 生成；false = 提示消息是代码存储库中的原始代码注释。
 
 
 ### 功能特点

@@ -13,21 +13,21 @@ This project aims to download projects from remote repositories based on the pro
 - `project_name`: Name of the project.
 - `create_time`: Time when the project was created.
 - `update_time`: Time when the project was last updated.
-- `file_path`: File path.
+- `file_path`: File path of the relevant focal class in its original repository.
 - `focal_module`: Focal module of the project.
 - `focal_package`: Focal package of the project.
 - `focal_class`: Focal class of the project.
-- `focal_name`: Focal name.
+- `focal_name`: Focal method name of the project.
 - `focal_parameter`: Focal parameter list.
-- `solution`: Solution.
-- `method_signature`: Method signature.
-- `left_context`: Left context.
-- `right_context`: Right context.
-- `test_function`: List of test functions.
-- `class_comment`: Class comment.
-- `import_text`: List of import texts.
-- `prompt`: Prompt message.
-- `prompt_is_gen_from_api`: Indicates whether the prompt message is generated from the API.
+- `solution`: Solution of the related problem. Note that this is taken directly from the original source file. Depending on the type of downstream tasks (code completion or code generation) and the amount of context that needs to be provided to the model, users can adopt and update the prompt field accordingly.
+- `method_signature`: Method signature of the target focal method.
+- `left_context`: Source code before the focal method.
+- `right_context`: Source code after the focal method (after the ending parenthesis).
+- `test_function`: List of test functions extracted from the original source code, correspond to testing the focal method.
+- `class_comment`: Class comment of the focal class.
+- `import_text`: List of import packages.
+- `prompt`: Prompt message that can be used directly to perform code generation. Note that if the original source code does not have code annotation/comments, we utilize DeepSeekCoder to generate the annotation. The prompt that we use to generate the code comments is “Summarize the following code that uses [framework] and generate the [programming language] comments. The response should be made up of two parts – a description followed by block tags. The block tags should include @param and @return.”
+- `prompt_is_gen_from_api`: true = the prompt message is generated from DeepSeekCoder API; false = the prompt message is the original code annotation/comment from the code repository.
 
 ### Fields for Python Dataset
 
@@ -38,19 +38,19 @@ This project aims to download projects from remote repositories based on the pro
 - `project_name`: Name of the project.
 - `create_time`: Time when the project was created.
 - `update_time`: Time when the project was last updated.
-- `file_path`: File path.
+- `file_path`: File path of the relevant focal class in its original repository.
 - `file_name`: File name.
 - `focal_class`: Focal class of the project.
-- `focal_name`: Focal name.
+- `focal_name`: Focal function name of the project.
 - `focal_parameter`: Focal parameter list.
-- `solution`: Solution.
-- `function_signature`: Function signature.
-- `left_context`: Left context.
-- `right_context`: Right context.
-- `test_function`: List of test functions.
+- `solution`: Solution of the related problem. Note that this is taken directly from the original source file. Depending on the type of downstream tasks (code completion or code generation) and the amount of context that needs to be provided to the model, users can adopt and update the prompt field accordingly.
+- `function_signature`: Function signature of the target focal function.
+- `left_context`: Source code before the focal function.
+- `right_context`: Source code after the focal function.
+- `test_function`: List of test functions extracted from the original source code, correspond to testing the focal method.
 - `import_text`: List of import texts.
-- `prompt`: Prompt message.
-- `prompt_is_gen_from_api`: Indicates whether the prompt message is generated from the API.
+- `prompt`: Prompt message that can be used directly to perform code generation. Note that if the original source code does not have code annotation/comments, we utilize DeepSeekCoder to generate the annotation. The prompt that we use to generate the code comments is “Summarize the following code that uses [framework] and generate the [programming language] comments. The response should be made up of two parts – a description followed by block tags. The block tags should include @param and @return.”
+- `prompt_is_gen_from_api`: true = the prompt message is generated from DeepSeekCoder API; false = the prompt message is the original code annotation/comment from the code repository.
 
 ### Key Features
 
