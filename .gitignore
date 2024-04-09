@@ -1,3 +1,5 @@
 /json_files/*
 /csv_files/*
 /repositories/*
+__pycache__
+output.log
