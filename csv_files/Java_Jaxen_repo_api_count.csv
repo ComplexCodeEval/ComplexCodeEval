@@ -1,8 +1,0 @@
-api,count,git_name,project_name
-org.jaxen.function.StringFunction.evaluate,5,liferay-portal,liferay-portal-7.4.3.66-ga66
-org.jaxen.dom.DOMXPath.class.getName,1,mule,mule-3.9.5-20230217
-org.jaxen.dom4j.Dom4jXPath.class.getName,1,mule,mule-3.9.5-20230217
-org.jaxen.function.StringFunction.evaluate,5,liferay-portal,liferay-portal-7.4.3.66-ga66
-org.jaxen.function.StringFunction.evaluate,6,alfresco-repository,alfresco-repository-alfresco-repository-8.287
-org.jaxen.function.BooleanFunction.evaluate,1,alfresco-repository,alfresco-repository-alfresco-repository-8.287
-org.jaxen.saxpath.Axis.lookup,2,alfresco-repository,alfresco-repository-alfresco-repository-8.287

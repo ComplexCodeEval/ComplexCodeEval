@@ -1,7 +1,0 @@
-api,count
-org.jdom2.xpath.XPathFactory.instance,92
-org.jdom2.Namespace.getNamespace,39
-org.jdom2.output.Format.getPrettyFormat,34
-org.jdom2.filter.Filters.element,22
-org.jdom2.filter.Filters.fpassthrough,13
-org.jdom2.xpath.XPath.newInstance,12

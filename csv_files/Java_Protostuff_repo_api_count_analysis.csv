@@ -1,6 +1,0 @@
-api,count
-io.protostuff.runtime.RuntimeSchema.getSchema,36
-io.protostuff.WireFormat.makeTag,22
-io.protostuff.LinkedBuffer.allocate,20
-io.protostuff.ProtostuffIOUtil.mergeFrom,18
-io.protostuff.ProtostuffIOUtil.toByteArray,16

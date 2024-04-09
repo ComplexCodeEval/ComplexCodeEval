@@ -1,8 +1,0 @@
-api,count
-org.reflections.util.ClasspathHelper.forClass,22
-org.reflections.util.ClasspathHelper.forPackage,22
-org.reflections.ReflectionUtils.withAnnotation,22
-org.reflections.util.ClasspathHelper.forClassLoader,16
-org.reflections.ReflectionUtils.getAllMethods,12
-org.reflections.ReflectionUtils.getAllFields,11
-org.reflections.vfs.Vfs.getDefaultUrlTypes,11

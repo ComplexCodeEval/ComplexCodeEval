@@ -1,6 +1,0 @@
-api,count
-com.auth0.jwt.JWT.create,456
-com.auth0.jwt.JWT.require,209
-com.auth0.jwt.algorithms.Algorithm.HMAC256,118
-com.auth0.jwt.JWT.decode,74
-com.auth0.jwt.algorithms.Algorithm.RSA256,19

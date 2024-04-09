@@ -1,5 +1,0 @@
-api,count
-jakarta.xml.bind.JAXBContext.newInstance,184
-jakarta.xml.bind.DatatypeConverter.printBase64Binary,35
-jakarta.xml.bind.DatatypeConverter.parseBase64Binary,24
-jakarta.xml.bind.JAXBElement.class.isAssignableFrom,17
