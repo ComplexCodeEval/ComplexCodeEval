@@ -1,3 +1,3 @@
-json_files/*
-csv_files/*
-repositories/*
+/json_files/*
+/csv_files/*
+/repositories/*
