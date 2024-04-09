@@ -1,0 +1,12 @@
+api,count
+io.swagger.v3.core.converter.ModelConverters.getInstance,216
+io.swagger.v3.core.util.Json.mapper,75
+io.swagger.converter.ModelConverters.getInstance,68
+io.swagger.util.Json.mapper,63
+io.swagger.v3.core.util.Yaml.mapper,36
+io.swagger.util.Yaml.mapper,25
+io.swagger.v3.core.util.AnnotationsUtils.getExtensions,23
+io.swagger.v3.core.util.Json.pretty,13
+io.swagger.jaxrs.ext.SwaggerExtensions.setExtensions,11
+io.swagger.models.parameters.add,11
+io.swagger.util.ReflectionUtils.getAnnotation,11

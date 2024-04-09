@@ -1,0 +1,12 @@
+api,count,git_name,project_name
+org.aspectj.bridge.MessageUtil.fail,1,high-performance-java-persistence,high-performance-java-persistence-master
+org.aspectj.lang.Aspects.aspectOf,5,automon,automon-1.0.3
+org.aspectj.lang.Aspects.aspectOf,3,mojito,mojito-0.110
+org.aspectj.lang.reflect.PerClauseKind.PERCFLOW.toString,1,spring-ide,spring-ide-3.9.22.RELEASE
+org.aspectj.lang.reflect.PerClauseKind.PERCFLOWBELOW.toString,1,spring-ide,spring-ide-3.9.22.RELEASE
+org.aspectj.weaver.tools.PointcutPrimitive.AT_WITHIN.getName,1,smart-cloud,smart-cloud-1.0.4
+org.aspectj.weaver.tools.PointcutPrimitive.AT_ANNOTATION.getName,1,smart-cloud,smart-cloud-1.0.4
+org.aspectj.weaver.tools.PointcutPrimitive.EXECUTION.getName,1,smart-cloud,smart-cloud-1.0.4
+org.aspectj.lang.annotation.value,1,Spring-Boot-Book,Spring-Boot-Book-master
+"org.aspectj.weaver.tools.PointcutParser.
+                    getPointcutParserSupportingAllPrimitivesAndUsingContextClassloaderForResolution",1,spring-framework-learning-code,spring-framework-learning-code-master

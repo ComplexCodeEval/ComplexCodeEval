@@ -1,0 +1,14 @@
+api,count
+com.google.gson.JsonParser.parseString,223
+com.google.gson.toJson,73
+com.google.gson.internal.bind.util.ISO8601Utils.parse,65
+com.google.gson.typeadapters.RuntimeTypeAdapterFactory.of,61
+com.google.gson.fromJson,54
+com.google.gson.reflect.TypeToken.get,42
+com.google.gson.Gson.class.getDeclaredMethod,30
+com.google.gson.JsonParser.parseReader,22
+com.google.gson.internal.bind.util.ISO8601Utils.format,21
+com.google.gson.reflect.TypeToken.getParameterized,20
+com.google.gson.internal.$Gson$Types.newParameterizedTypeWithOwner,14
+com.google.gson.Gson.class.getPackage,12
+com.google.gson.JsonObject.class.equals,12

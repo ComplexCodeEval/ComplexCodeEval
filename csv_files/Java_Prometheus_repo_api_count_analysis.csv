@@ -1,0 +1,15 @@
+api,count
+io.prometheus.client.Gauge.build,224
+io.prometheus.client.Counter.build,172
+io.prometheus.client.Histogram.build,120
+io.prometheus.client.Summary.build,84
+io.prometheus.client.CollectorRegistry.defaultRegistry.getSampleValue,47
+io.prometheus.client.CollectorRegistry.defaultRegistry.unregister,41
+io.prometheus.client.exporter.common.TextFormat.write004,24
+io.prometheus.client.hotspot.DefaultExports.initialize,23
+io.prometheus.client.CollectorRegistry.defaultRegistry.metricFamilySamples,18
+io.prometheus.client.exporter.common.TextFormat.writeFormat,17
+io.prometheus.client.Collector.doubleToGoString,16
+io.prometheus.client.exporter.common.TextFormat.chooseContentType,15
+io.prometheus.client.Info.build,12
+io.prometheus.client.Collector.sanitizeMetricName,11

@@ -1,0 +1,10 @@
+api,count,git_name,project_name
+org.mariadb.jdbc.MariaDbDataSource.class.getName,1,keycloak,keycloak-nightly
+org.mariadb.jdbc.client.impl.ConnectionHelper.standardSocket,1,quarkus,quarkus-2.16.4.Final
+org.mariadb.jdbc.MariaDbDataSource.class.getName,1,shardingsphere,shardingsphere-5.3.1
+org.mariadb.jdbc.MariaDbDataSource.class.getName,1,incubator-shardingsphere,shardingsphere-5.3.1
+org.mariadb.jdbc.MariaDbDataSource.class.getName,1,sharding-jdbc,shardingsphere-5.3.1
+org.mariadb.jdbc.MariaDbDataSource.class.getName,1,sharding-sphere,shardingsphere-5.3.1
+org.mariadb.jdbc.MariaDbDataSource.class.getName,1,sharding-jdbc,shardingsphere-5.3.1
+org.mariadb.jdbc.MariaDbDataSource.class.getName,1,modeldb,modeldb-client-v0.22.0
+org.mariadb.jdbc.UrlParser.parse,1,hetu-core,hetu-core-1.9.0

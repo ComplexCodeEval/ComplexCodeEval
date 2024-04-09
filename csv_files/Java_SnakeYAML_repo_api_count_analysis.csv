@@ -1,0 +1,5 @@
+api,count
+org.yaml.snakeyaml.nodes.Tag.NULL.equals,22
+org.yaml.snakeyaml.nodes.Tag.MAP.equals,16
+org.yaml.snakeyaml.events.next,15
+org.yaml.snakeyaml.nodes.Tag.SEQ.equals,11

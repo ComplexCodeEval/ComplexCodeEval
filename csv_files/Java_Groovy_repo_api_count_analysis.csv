@@ -1,0 +1,4 @@
+api,count
+org.codehaus.groovy.runtime.InvokerHelper.asList,177
+org.codehaus.groovy.ast.ClassHelper.make,16
+org.codehaus.groovy.runtime.InvokerHelper.createScript,13

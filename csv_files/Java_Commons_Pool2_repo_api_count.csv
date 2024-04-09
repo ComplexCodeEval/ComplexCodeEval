@@ -1,0 +1,5 @@
+api,count,git_name,project_name
+org.apache.commons.pool2.impl.CallStackUtils.class.getName,1,apm-agent-java,apm-agent-java-1.36.0
+org.apache.commons.pool2.impl.GenericObjectPool.class.cast,1,tomee,tomee-tomee-project-8.0.14
+org.apache.commons.pool2.impl.DefaultEvictionPolicy.class.getName,2,camel-quarkus,camel-quarkus-2.16.0
+org.apache.commons.pool2.impl.GenericObjectPool.class.getName,1,ddf,ddf-ddf-2.29.0

@@ -1,0 +1,16 @@
+api,count
+org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString,367
+com.liferay.portal.tools.rest.builder.internal.freemarker.util.FreeMarkerUtil.processTemplate,56
+org.apache.plc4x.plugins.codegenerator.protocol.freemarker.Tracer.start,36
+com.webcohesion.enunciate.util.freemarker.FreemarkerUtil.unwrap,33
+org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration.class.getName,31
+org.apache.shardingsphere.data.pipeline.postgresql.util.PostgreSQLPipelineFreemarkerManager.getSQLByVersion,25
+com.liferay.portal.tools.rest.builder.internal.freemarker.tool.java.parser.util.OpenAPIParserUtil.getHTTPMethod,24
+freemarker.template.getConfiguration,22
+freemarker.ext.beans.StringModel.class.cast,20
+freemarker.template.utility.DeepUnwrap.unwrap,19
+freemarker.ext.beans.BeansWrapper.getDefaultInstance,19
+freemarker.template.Configuration.getVersion,14
+com.liferay.portal.tools.rest.builder.internal.freemarker.util.OpenAPIUtil.getAllSchemas,12
+com.company.manerger.sys.ui.tag.form.support.FreemarkerFormTagHelper.getTagStatic,11
+com.kobylynskyi.graphql.codegen.generators.FreeMarkerTemplateFilesCreator.create,11

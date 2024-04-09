@@ -1,0 +1,12 @@
+api,count
+io.github.resilience4j.circuitbreaker.CircuitBreakerConfig.custom,101
+io.github.resilience4j.timelimiter.TimeLimiterConfig.custom,74
+io.github.resilience4j.retry.RetryConfig.custom,49
+io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry.ofDefaults,33
+io.github.resilience4j.timelimiter.TimeLimiterRegistry.ofDefaults,32
+io.github.resilience4j.bulkhead.BulkheadConfig.custom,31
+io.github.resilience4j.micrometer.tagged.CircuitBreakerMetricNames.custom,18
+io.github.resilience4j.circuitbreaker.CircuitBreakerConfig.ofDefaults,17
+io.github.resilience4j.decorators.Decorators.ofCheckedSupplier,15
+io.github.resilience4j.ratelimiter.RateLimiterConfig.custom,15
+io.github.resilience4j.circuitbreaker.CircuitBreaker.decorateSupplier,12

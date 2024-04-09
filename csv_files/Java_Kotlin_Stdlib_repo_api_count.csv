@@ -1,0 +1,2 @@
+api,count,git_name,project_name
+org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapperKt.getKotlinPluginVersion,1,spring-boot,spring-boot-3.0.4

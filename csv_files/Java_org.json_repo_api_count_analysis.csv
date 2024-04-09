@@ -1,0 +1,11 @@
+api,count
+org.json.simple.JSONValue.parse,83
+org.json.simple.JSONValue.toJSONString,55
+org.apache.storm.shade.org.json.simple.JSONValue.toJSONString,22
+org.json.JSONObject.getNames,18
+org.json.XML.toJSONObject,18
+org.jsondoc.core.util.JSONDocTypeBuilder.build,17
+org.apache.storm.shade.org.json.simple.JSONValue.parseWithException,16
+org.jsondoc.springmvc.scanner.SpringBuilderUtils.getAnnotation,13
+org.jsondoc.springmvc.scanner.SpringBuilderUtils.isAnnotated,12
+org.json.simple.JSONValue.parseWithException,12

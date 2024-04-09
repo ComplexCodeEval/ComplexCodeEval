@@ -1,0 +1,3 @@
+api,count
+net.sf.cglib.reflect.FastClass.create,32
+net.sf.cglib.proxy.Enhancer.registerCallbacks,13

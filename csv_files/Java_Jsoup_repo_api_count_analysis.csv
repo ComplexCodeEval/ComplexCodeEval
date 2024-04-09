@@ -1,0 +1,13 @@
+api,count
+org.jsoup.Jsoup.parse,887
+org.jsoup.Jsoup.connect,815
+org.jsoup.helper.Validate.notNull,560
+org.jsoup.Jsoup.parseBodyFragment,87
+org.jsoup.parser.Tag.valueOf,68
+org.jsoup.Jsoup.clean,50
+org.jsoup.select.Collector.collect,38
+org.jsoup.helper.Validate.notEmpty,26
+org.jsoup.safety.Whitelist.none,13
+org.jsoup.safety.Safelist.none,12
+org.jsoup.parser.Parser.xmlParser,12
+org.jsoup.select.NodeTraversor.traverse,11

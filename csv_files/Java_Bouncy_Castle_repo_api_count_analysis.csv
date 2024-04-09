@@ -1,0 +1,14 @@
+api,count
+org.bouncycastle.asn1.x509.SubjectPublicKeyInfo.getInstance,48
+org.bouncycastle.util.encoders.Hex.toHexString,31
+org.bouncycastle.openpgp.PGPUtil.getDecoderStream,31
+org.bouncycastle.util.encoders.Hex.decode,28
+org.bouncycastle.util.Arrays.copyOfRange,23
+org.bouncycastle.asn1.x509.CRLReason.lookup,22
+org.bouncycastle.asn1.ASN1Sequence.getInstance,21
+org.bouncycastle.asn1.x509.GeneralNames.getInstance,17
+org.bouncycastle.asn1.x500.style.IETFUtils.valueToString,16
+org.bouncycastle.pqc.math.linearalgebra.ByteUtils.fromHexString,16
+org.bouncycastle.util.encoders.Base64.decode,14
+org.bouncycastle.crypto.CryptoServicesRegistrar.isInApprovedOnlyMode,14
+org.bouncycastle.pqc.math.linearalgebra.ByteUtils.toHexString,12

@@ -1,0 +1,15 @@
+api,count
+com.sun.jna.Platform.isWindows,192
+com.sun.jna.Native.toString,67
+com.sun.jna.platform.win32.Advapi32Util.getUserName,52
+com.sun.jna.Native.getLastError,49
+com.sun.jna.Platform.class.getPackage,24
+com.sun.jna.Platform.isLinux,18
+com.sun.jna.Pointer.nativeValue,17
+com.sun.jna.platform.win32.Advapi32Util.isWellKnownSid,16
+com.sun.jna.platform.win32.Secur32Util.getUserNameEx,14
+com.sun.jna.platform.win32.Netapi32.INSTANCE.NetUserDel,14
+com.sun.jna.platform.win32.Netapi32.INSTANCE.NetUserAdd,14
+com.sun.jna.platform.win32.Netapi32Util.getJoinStatus,13
+com.sun.jna.platform.win32.Advapi32Util.registryGetStringValue,12
+com.sun.jna.platform.win32.Kernel32.INSTANCE.GetLastError,12
