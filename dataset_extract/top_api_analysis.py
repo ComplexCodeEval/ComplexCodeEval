@@ -167,6 +167,7 @@ def analysis_top_api(properties, api_count_path, api_count_analysis_path, commen
     json_result = {}
     json_result_api = {}
     json_result_method = {}
+    process_project = {}
 
     for api in api_count_analysis_csv_df['api'].values:
         print(f"*****Processing {count_api}th api: {api}*****")
@@ -175,36 +176,39 @@ def analysis_top_api(properties, api_count_path, api_count_analysis_path, commen
             project_name = row['project_name']
             git_name = row['git_name']
             project_path = os.path.join(repo_path, project_name)
-            if not os.path.exists(project_path):
-                if not os.path.exists(project_path + ".zip"):
-                    download_url_df = \
-                        xls_df[(xls_df['git_name'] == git_name) & (xls_df['file_name'] == project_name + ".zip")][
-                            'download_url']
-                    if not download_url_df.empty:
-                        download_url = download_url_df.values[0]
-                        download_git_repo(download_url, repo_path, project_name + ".zip")
-                        extract_repo(repo_path, project_name + ".zip")
-            if not os.path.exists(project_path):
-                os.remove(project_path + ".zip")
-                continue
-            file_parsers = get_project_parser(project_path, properties)
-            if not file_parsers:
-                print(f"--->project {project_name} has no java files")
+            if project_name not in process_project.keys():
+                if not os.path.exists(project_path):
+                    if not os.path.exists(project_path + ".zip"):
+                        download_url_df = \
+                            xls_df[(xls_df['git_name'] == git_name) & (xls_df['file_name'] == project_name + ".zip")][
+                                'download_url']
+                        if not download_url_df.empty:
+                            download_url = download_url_df.values[0]
+                            download_git_repo(download_url, repo_path, project_name + ".zip")
+                            extract_repo(repo_path, project_name + ".zip")
+                if not os.path.exists(project_path):
+                    os.remove(project_path + ".zip")
+                    continue
+                file_parsers = get_project_parser(project_path, properties)
+                if not file_parsers:
+                    print(f"--->project {project_name} has no java files")
+                    continue
+                if properties["language"] == "Java":
+                    match_result = match_methods_and_tests(file_parsers)
+                elif properties["language"] == "Python":
+                    match_result = match_functions_and_tests(file_parsers)
+                else:
+                    raise Exception("Unsupported language")
+                process_project[project_name] = match_result
+            else :
+                match_result = process_project[project_name]
+            if not match_result:
+                print(f"--->Error: project {project_name} has no match result")
                 continue
             if properties["language"] == "Java":
-                match_result = match_methods_and_tests(file_parsers)
-                if not match_result:
-                    print(f"--->Error: project {project_name} has no match result")
-                    continue
                 java_result_gen(match_result, api, count_api, api_json, xls_df, git_name, project_name, repo_path)
             elif properties["language"] == "Python":
-                match_result = match_functions_and_tests(file_parsers)
-                if not match_result:
-                    print(f"--->Error: project {project_name} has no match result")
-                    continue
                 python_result_gen(match_result, api, count_api, api_json, xls_df, git_name, project_name, repo_path)
-            else:
-                raise Exception("Unsupported language")
             if len(api_json) == 10:
                 break
         if len(api_json) > 0:
