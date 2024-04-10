@@ -1,7 +1,7 @@
 /json_files/*
 /csv_files/*
 /repositories/*
-/dataset/__pycache__/*
+dataset/__pycache__/*
 dataset/entity/__pycache__/*
 dataset/parser/__pycache__/* 
 dataset/utils/__pycache__/*
