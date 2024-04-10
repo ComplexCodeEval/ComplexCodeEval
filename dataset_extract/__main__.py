@@ -49,7 +49,7 @@ def main():
         sys.exit(1)
     else:
         init_path(properties)
-        repo_api_count_analysis(properties)
+        # repo_api_count_analysis(properties)
         top_api_analysis(properties)
         if properties["remove_repo"]:
             print("Removing repo")

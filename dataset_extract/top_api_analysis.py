@@ -43,10 +43,12 @@ def java_result_gen(match_result, api, count_api, api_json, xls_df, git_name, pr
                         result_entity.set_version(temp_df["version"].values[0])
                         result_entity.set_project_name(project_name + ".zip")
                         try:
-                            result_entity.set_create_time(temp_df["create_time"].values[0].isoformat())
+                            create_time = pd.to_datetime(temp_df["create_time"].values[0])
+                            result_entity.set_create_time(create_time.isoformat())
                         except:
                             pass
-                        result_entity.set_update_time(temp_df["update_time"].values[0].isoformat())
+                        update_time = pd.to_datetime(temp_df["update_time"].values[0])
+                        result_entity.set_update_time(update_time.isoformat())
                         result_entity.set_file_path(file_entity.get_file_path().replace(repo_path, ""))
                         file_path = result_entity.get_file_path()
                         temp_path = "".join(file_path.split(project_name + "/")[-1]).split("/src/main")
