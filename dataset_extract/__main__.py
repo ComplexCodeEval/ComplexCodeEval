@@ -3,6 +3,7 @@ import sys
 import yaml
 import os
 import shutil
+from time import time
 
 from dataset_extract.repo_api_count_analysis import repo_api_count_analysis
 from dataset_extract.top_api_analysis import top_api_analysis
@@ -49,7 +50,7 @@ def main():
         sys.exit(1)
     else:
         init_path(properties)
-        # repo_api_count_analysis(properties)
+        repo_api_count_analysis(properties)
         top_api_analysis(properties)
         if properties["remove_repo"]:
             print("Removing repo")
@@ -58,4 +59,7 @@ def main():
 
 
 if __name__ == "__main__":
+    start = time()
     main()
+    end = time()
+    print("===>Total time: ", end - start)

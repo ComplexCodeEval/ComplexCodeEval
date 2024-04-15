@@ -33,23 +33,30 @@ def csv_init(file_path):
 
 
 def get_api(path, properties):
-    language = properties["language"]
-    if language == 'Java':
-        java_files = get_java_files(path)
-        for file in java_files:
-            try:
-                yield from analyze_java_api(file, properties["API"]).items()
-            except Exception:
-                continue
-    elif language == 'Python':
-        python_files = get_python_files(path)
-        for file in python_files:
-            try:
-                yield from analyze_python_api(file, properties["API"]).items()
-            except Exception:
-                continue
-    else:
-        raise Exception("Unsupported language")
+    try :
+        language = properties["language"]
+        if language == 'Java':
+            java_files = get_java_files(path)
+            for file in java_files:
+                try:
+                    yield from analyze_java_api(file, properties["API"]).items()
+                except UnicodeDecodeError:
+                    raise
+                except Exception:
+                    continue
+        elif language == 'Python':
+            python_files = get_python_files(path)
+            for file in python_files:
+                try:
+                    yield from analyze_python_api(file, properties["API"]).items()
+                except UnicodeDecodeError:
+                    raise
+                except Exception:
+                    continue
+        else:
+            raise Exception("Unsupported language")
+    except UnicodeDecodeError:
+        pass
 
 
 def repo_api_count_analysis(properties):

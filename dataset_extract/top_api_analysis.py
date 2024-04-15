@@ -19,139 +19,146 @@ from dataset_extract.utils.repo_dependency_utils import get_repo_dependency
 def java_result_gen(match_result, api, count_api, api_json, xls_df, git_name, project_name, repo_path):
     flag = False
     for method_entity in match_result.keys():
-        file_entity = method_entity.get_belong_class().get_belong_file()
-        class_entity = method_entity.get_belong_class()
-        import_texts = file_entity.get_import_text()
-        package_text = file_entity.get_package_text()
-        for invocation_method in method_entity.get_call_method():
-            if invocation_method.get_call_method_name() not in api:
-                continue
-            for import_text in import_texts:
-                if import_text in api:
-                    temp = ".".join(import_text.split(".")[:-1])
-                    temp = temp + "." + invocation_method.get_call_method_name()
-                    if temp == api:
-                        result_entity = resultEntity()
-                        print(
-                            f"===>Correct: find {count_api}th api {len(api_json) + 1}th method "
-                            f": {api} in {method_entity.get_method_name()}")
-                        temp_df = xls_df[
-                            (xls_df['git_name'] == git_name) & (xls_df['file_name'] == project_name + ".zip")]
-                        result_entity.set_git_group(temp_df["git_group"].values[0])
-                        result_entity.set_git_name(git_name)
-                        result_entity.set_language(temp_df["language"].values[0])
-                        result_entity.set_version(temp_df["version"].values[0])
-                        result_entity.set_project_name(project_name + ".zip")
-                        try:
-                            create_time = pd.to_datetime(temp_df["create_time"].values[0])
-                            result_entity.set_create_time(create_time.isoformat())
-                        except:
-                            pass
-                        update_time = pd.to_datetime(temp_df["update_time"].values[0])
-                        result_entity.set_update_time(update_time.isoformat())
-                        result_entity.set_file_path(file_entity.get_file_path().replace(repo_path, ""))
-                        file_path = result_entity.get_file_path()
-                        temp_path = "".join(file_path.split(project_name + "/")[-1]).split("/src/main")
-                        # package_path = temp_path[-1]
-                        if len(temp_path) > 1 and temp_path[0] != "":
-                            module_path = temp_path[0]
-                        else:
-                            module_path = project_name
-                        result_entity.set_focal_module(module_path)
-                        result_entity.set_focal_package(package_text.replace(".", "/"))
-                        result_entity.set_focal_class(class_entity.get_class_name())
-                        result_entity.set_focal_name(method_entity.get_method_name())
-                        for parameter_entity in method_entity.get_parameter_entity():
-                            result_entity.set_focal_parameter(parameter_entity.get_parameter_type())
-                        result_entity.set_solution(method_entity.get_node().text.decode("utf-8"))
-                        result_entity.set_method_signature(method_entity.get_method_signature())
-                        result_entity.set_left_context(method_entity.get_left_context())
-                        result_entity.set_right_context(method_entity.get_right_context())
-                        for test_method in match_result[method_entity]:
-                            result_entity.set_test_function(test_method.get_node().text.decode("utf-8"))
-                        result_entity.set_class_comment(class_entity.get_comment())
-                        for import_text in import_texts:
-                            result_entity.set_import_text(import_text)
-                        result_entity.set_prompt(method_entity.get_comment())
-                        if not result_entity.get_prompt():
-                            result_entity.set_prompt(
-                                gen_comment_from_api(result_entity.get_solution(), api, language="java"))
-                            result_entity.set_is_gen_from_api()
-                        api_json.append(vars(result_entity))
-                        flag = True
-                        break
+        try:
+            file_entity = method_entity.get_belong_class().get_belong_file()
+            class_entity = method_entity.get_belong_class()
+            import_texts = file_entity.get_import_text()
+            package_text = file_entity.get_package_text()
+            for invocation_method in method_entity.get_call_method():
+                if invocation_method.get_call_method_name() not in api:
+                    continue
+                for import_text in import_texts:
+                    if import_text in api:
+                        temp = ".".join(import_text.split(".")[:-1])
+                        temp = temp + "." + invocation_method.get_call_method_name()
+                        if temp == api:
+                            result_entity = resultEntity()
+                            print(
+                                f"===>Correct: find {count_api}th api {len(api_json) + 1}th method "
+                                f": {api} in {method_entity.get_method_name()}")
+                            temp_df = xls_df[
+                                (xls_df['git_name'] == git_name) & (xls_df['file_name'] == project_name + ".zip")]
+                            result_entity.set_git_group(temp_df["git_group"].values[0])
+                            result_entity.set_git_name(git_name)
+                            result_entity.set_language(temp_df["language"].values[0])
+                            result_entity.set_version(temp_df["version"].values[0])
+                            result_entity.set_project_name(project_name + ".zip")
+                            try:
+                                create_time = pd.to_datetime(temp_df["create_time"].values[0])
+                                result_entity.set_create_time(create_time.isoformat())
+                            except:
+                                pass
+                            update_time = pd.to_datetime(temp_df["update_time"].values[0])
+                            result_entity.set_update_time(update_time.isoformat())
+                            result_entity.set_file_path(file_entity.get_file_path().replace(repo_path, ""))
+                            file_path = result_entity.get_file_path()
+                            temp_path = "".join(file_path.split(project_name + "/")[-1]).split("/src/main")
+                            # package_path = temp_path[-1]
+                            if len(temp_path) > 1 and temp_path[0] != "":
+                                module_path = temp_path[0]
+                            else:
+                                module_path = project_name
+                            result_entity.set_focal_module(module_path)
+                            result_entity.set_focal_package(package_text.replace(".", "/"))
+                            result_entity.set_focal_class(class_entity.get_class_name())
+                            result_entity.set_focal_name(method_entity.get_method_name())
+                            for parameter_entity in method_entity.get_parameter_entity():
+                                result_entity.set_focal_parameter(parameter_entity.get_parameter_type())
+                            result_entity.set_solution(method_entity.get_node())
+                            result_entity.set_method_signature(method_entity.get_method_signature())
+                            result_entity.set_left_context(method_entity.get_left_context())
+                            result_entity.set_right_context(method_entity.get_right_context())
+                            for test_method in match_result[method_entity]:
+                                result_entity.set_test_function(test_method.get_node())
+                            result_entity.set_class_comment(class_entity.get_comment())
+                            for import_text in import_texts:
+                                result_entity.set_import_text(import_text)
+                            result_entity.set_prompt(method_entity.get_comment())
+                            if not result_entity.get_prompt():
+                                result_entity.set_prompt(
+                                    gen_comment_from_api(result_entity.get_solution(), api, language="java"))
+                                result_entity.set_is_gen_from_api()
+                            api_json.append(vars(result_entity))
+                            flag = True
+                            break
+                if flag:
+                    break
             if flag:
                 break
-        if flag:
-            break
+        except:
+            continue
 
 
 def python_result_gen(match_result, api, count_api, api_json, xls_df, git_name, project_name, repo_path):
     flag = False
     for function_entity in match_result.keys():
-        file_entity = function_entity.get_belong_file()
-        class_entity = function_entity.get_belong_class()
-        for call_method in function_entity.get_call_method():
-            if api == call_method.get_call_api():
-                result_entity = pythonResultEnity()
-                print(
-                    f"===>Correct: find {count_api}th api {len(api_json) + 1}th method "
-                    f": {api} in {function_entity.get_function_name()}")
-                temp_df = xls_df[
-                    (xls_df['git_name'] == git_name) & (xls_df['file_name'] == project_name + ".zip")]
-                result_entity.set_git_group(temp_df["git_group"].values[0])
-                result_entity.set_git_name(git_name)
-                result_entity.set_language(temp_df["language"].values[0])
-                result_entity.set_version(temp_df["version"].values[0])
-                result_entity.set_project_name(project_name + ".zip")
-                try:
-                    result_entity.set_create_time(temp_df["create_time"].values[0].isoformat())
-                except:
-                    pass
-                result_entity.set_update_time(temp_df["update_time"].values[0].isoformat())
-                result_entity.set_file_path(file_entity.get_file_path().replace(repo_path, ""))
-                result_entity.set_file_name(file_entity.get_file_name())
-                if class_entity:
-                    result_entity.set_focal_class(class_entity.get_class_name())
-                result_entity.set_focal_name(function_entity.get_function_name())
-                for parameter_entity in function_entity.get_parameter_entity():
-                    result_entity.set_focal_parameter(parameter_entity.get_parameter_name())
-                function_node = function_entity.get_node()
-                result_entity.set_solution(function_node.text.decode("utf-8"))
-                result_entity.set_function_signature(function_entity.get_function_signature())
-                result_entity.set_left_context(function_entity.get_left_context())
-                result_entity.set_right_context(function_entity.get_right_context())
-                for test_function_entity in match_result[function_entity]:
-                    result_entity.set_test_function(test_function_entity.get_node().text.decode("utf-8"))
-                for import_text in file_entity.get_import_text():
-                    result_entity.set_import_text(import_text)
-                result_entity.set_prompt(function_entity.get_comment())
-                if not result_entity.get_prompt():
-                    result_entity.set_prompt(gen_comment_from_api(result_entity.get_solution(), api, language="python"))
-                    result_entity.set_is_gen_from_api()
-                api_json.append(vars(result_entity))
-                flag = True
+        try :
+            file_entity = function_entity.get_belong_file()
+            class_entity = function_entity.get_belong_class()
+            for call_method in function_entity.get_call_method():
+                if api == call_method.get_call_api():
+                    result_entity = pythonResultEnity()
+                    print(
+                        f"===>Correct: find {count_api}th api {len(api_json) + 1}th method "
+                        f": {api} in {function_entity.get_function_name()}")
+                    temp_df = xls_df[
+                        (xls_df['git_name'] == git_name) & (xls_df['file_name'] == project_name + ".zip")]
+                    result_entity.set_git_group(temp_df["git_group"].values[0])
+                    result_entity.set_git_name(git_name)
+                    result_entity.set_language(temp_df["language"].values[0])
+                    result_entity.set_version(temp_df["version"].values[0])
+                    result_entity.set_project_name(project_name + ".zip")
+                    try:
+                        result_entity.set_create_time(temp_df["create_time"].values[0].isoformat())
+                    except:
+                        pass
+                    result_entity.set_update_time(temp_df["update_time"].values[0].isoformat())
+                    result_entity.set_file_path(file_entity.get_file_path().replace(repo_path, ""))
+                    result_entity.set_file_name(file_entity.get_file_name())
+                    if class_entity:
+                        result_entity.set_focal_class(class_entity.get_class_name())
+                    result_entity.set_focal_name(function_entity.get_function_name())
+                    for parameter_entity in function_entity.get_parameter_entity():
+                        result_entity.set_focal_parameter(parameter_entity.get_parameter_name())
+                    result_entity.set_solution(function_entity.get_node())
+                    result_entity.set_function_signature(function_entity.get_function_signature())
+                    result_entity.set_left_context(function_entity.get_left_context())
+                    result_entity.set_right_context(function_entity.get_right_context())
+                    for test_function_entity in match_result[function_entity]:
+                        result_entity.set_test_function(test_function_entity.get_node())
+                    for import_text in file_entity.get_import_text():
+                        result_entity.set_import_text(import_text)
+                    result_entity.set_prompt(function_entity.get_comment())
+                    if not result_entity.get_prompt():
+                        result_entity.set_prompt(gen_comment_from_api(result_entity.get_solution(), api, language="python"))
+                        result_entity.set_is_gen_from_api()
+                    api_json.append(vars(result_entity))
+                    flag = True
+                    break
+            if flag:
                 break
-        if flag:
-            break
+        except:
+            continue
 
 
 def get_project_parser(project_path, properties):
-    if properties["language"] == "Java":
-        java_files = get_java_files(project_path)
-        file_parsers = []
-        for file in java_files:
-            file_parsers.append(parse_java_file(file))
-        return file_parsers
-    elif properties["language"] == "Python":
-        python_files = get_python_files(project_path)
-        file_parsers = []
-        for file in python_files:
-            file_parsers.append(parse_python_file(file))
-        return file_parsers
-    else:
-        raise Exception("Unsupported language")
-
+    try:
+        if properties["language"] == "Java":
+            java_files = get_java_files(project_path)
+            file_parsers = []
+            for file in java_files:
+                file_parsers.append(parse_java_file(file))
+            return file_parsers
+        elif properties["language"] == "Python":
+            python_files = get_python_files(project_path)
+            file_parsers = []
+            for file in python_files:
+                file_parsers.append(parse_python_file(file))
+            return file_parsers
+        else:
+            raise Exception("Unsupported language")
+    except UnicodeDecodeError:
+        return None
 
 def analysis_top_api(properties, api_count_path, api_count_analysis_path, comment_tested_API_1, comment_tested_API_2):
     xls_path = os.path.abspath(properties["xls_path"])
@@ -192,6 +199,7 @@ def analysis_top_api(properties, api_count_path, api_count_analysis_path, commen
                 file_parsers = get_project_parser(project_path, properties)
                 if not file_parsers:
                     print(f"--->project {project_name} has no java files")
+                    process_project[project_name] = None
                     continue
                 if properties["language"] == "Java":
                     match_result = match_methods_and_tests(file_parsers)
