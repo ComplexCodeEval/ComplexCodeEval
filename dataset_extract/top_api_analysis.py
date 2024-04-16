@@ -85,7 +85,8 @@ def java_result_gen(match_result, api, count_api, api_json, xls_df, git_name, pr
                     break
             if flag:
                 break
-        except:
+        except Exception as e:
+            print("--->Error: ", e)
             continue
 
 
@@ -109,10 +110,12 @@ def python_result_gen(match_result, api, count_api, api_json, xls_df, git_name, 
                     result_entity.set_version(temp_df["version"].values[0])
                     result_entity.set_project_name(project_name + ".zip")
                     try:
-                        result_entity.set_create_time(temp_df["create_time"].values[0].isoformat())
+                        create_time = pd.to_datetime(temp_df["create_time"].values[0])
+                        result_entity.set_create_time(create_time.isoformat())
                     except:
                         pass
-                    result_entity.set_update_time(temp_df["update_time"].values[0].isoformat())
+                    update_time = pd.to_datetime(temp_df["update_time"].values[0])
+                    result_entity.set_update_time(update_time.isoformat())
                     result_entity.set_file_path(file_entity.get_file_path().replace(repo_path, ""))
                     result_entity.set_file_name(file_entity.get_file_name())
                     if class_entity:
@@ -137,7 +140,8 @@ def python_result_gen(match_result, api, count_api, api_json, xls_df, git_name, 
                     break
             if flag:
                 break
-        except:
+        except Exception as e:
+            print("--->Error: ", e)
             continue
 
 
@@ -198,7 +202,7 @@ def analysis_top_api(properties, api_count_path, api_count_analysis_path, commen
                     continue
                 file_parsers = get_project_parser(project_path, properties)
                 if not file_parsers:
-                    print(f"--->project {project_name} has no java files")
+                    print(f"--->project {project_name} has no {properties['language']} files")
                     process_project[project_name] = None
                     continue
                 if properties["language"] == "Java":
@@ -244,7 +248,7 @@ def analysis_top_api(properties, api_count_path, api_count_analysis_path, commen
     # else :
     #     json_result_method = json_result
     with open(comment_tested_API_1, 'w') as f:
-        json.dump(json_result_api, f, indent=2)
+        json.dump(json_result_api, f, indent=2, ensure_ascii=False)
     # with open(current_path + json_path + comment_tested_API_2, 'w') as f:
     #     json.dump(json_result_method, f, indent=2)
 

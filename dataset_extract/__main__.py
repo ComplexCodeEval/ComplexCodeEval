@@ -7,6 +7,7 @@ from time import time
 
 from dataset_extract.repo_api_count_analysis import repo_api_count_analysis
 from dataset_extract.top_api_analysis import top_api_analysis
+from dataset_extract.grab_repositories import grab_repositories
 
 
 def read_profile():
@@ -31,6 +32,8 @@ def init_path(properties):
         os.makedirs(properties["csv_path"])
     if not os.path.exists(properties["json_path"]):
         os.makedirs(properties["json_path"])
+    if not os.path.exists(properties['xls_path']):
+        os.makedirs(properties['xls_path'])
 
 
 def remove_intermediate_files(properties):
@@ -50,6 +53,7 @@ def main():
         sys.exit(1)
     else:
         init_path(properties)
+        grab_repositories(properties)
         repo_api_count_analysis(properties)
         top_api_analysis(properties)
         if properties["remove_repo"]:

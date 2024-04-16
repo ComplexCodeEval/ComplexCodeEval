@@ -85,8 +85,7 @@ def analyze_java_api(path, apis):
             return api_count
 
     except UnicodeDecodeError:
-        print(f"UnicodeDecodeError: {path}, skip this file")
-        raise 
+        print(f"UnicodeDecodeError: {path}, skip this file") 
     except RecursionError:
         print(f"RecursionError: {path}, skip this file")
 
@@ -254,7 +253,6 @@ def parse_java_file(path):
             return file_entity
     except UnicodeDecodeError:
         print(f"UnicodeDecodeError: {path}, skip this file")
-        raise
     except RecursionError:
         print(f"RecursionError: {path}, skip this file")
 
@@ -328,7 +326,6 @@ def analyze_python_api(path, apis):
 
     except UnicodeDecodeError:
         print(f"UnicodeDecodeError: {path}, skip this file")
-        raise
     except RecursionError:
         print(f"RecursionError: {path}, skip this file")
 
@@ -477,15 +474,16 @@ def parse_python_class(node, class_entity):
                     class_entity.set_function_entity(function_entity)
         elif child.type == "decorated_definition":
             body_node = child.child_by_field_name("definition")
-            function_entity = pythonFunctionEntity(body_node)
-            function_entity.set_belong_class(class_entity)
-            function_entity.set_belong_file(class_entity.get_belong_file())
-            if parse_python_function(body_node, function_entity):
-                class_entity.set_function_entity(function_entity)
-                for children in child.children:
-                    if children.type == "decorator":
-                        decorator = children.text.decode("utf-8")
-                        function_entity.set_decorator(decorator)
+            if body_node.type == "function_definition":
+                function_entity = pythonFunctionEntity(body_node)
+                function_entity.set_belong_class(class_entity)
+                function_entity.set_belong_file(class_entity.get_belong_file())
+                if parse_python_function(body_node, function_entity):
+                    class_entity.set_function_entity(function_entity)
+                    for children in child.children:
+                        if children.type == "decorator":
+                            decorator = children.text.decode("utf-8")
+                            function_entity.set_decorator(decorator)
 
 
 def parse_python_file(path):
@@ -546,9 +544,9 @@ def parse_python_file(path):
                         module = module.next_named_sibling
                 elif node.type == "function_definition":
                     function_entity = pythonFunctionEntity(node)
-                    file_entity.set_function_entity(function_entity)
                     function_entity.set_belong_file(file_entity)
-                    parse_python_function(node, function_entity)
+                    if parse_python_function(node, function_entity):
+                        file_entity.set_function_entity(function_entity)
                 elif node.type == "class_definition":
                     class_entity = pythonClassEntity(node)
                     file_entity.set_class_entity(class_entity)
@@ -558,9 +556,13 @@ def parse_python_file(path):
                     body_node = node.child_by_field_name("definition")
                     if body_node.type == "function_definition":
                         function_entity = pythonFunctionEntity(body_node)
-                        file_entity.set_function_entity(function_entity)
                         function_entity.set_belong_file(file_entity)
-                        parse_python_function(body_node, function_entity)
+                        if parse_python_function(body_node, function_entity):
+                            file_entity.set_function_entity(function_entity)
+                            for children in node.children:
+                                if children.type == "decorator":
+                                    decorator = children.text.decode("utf-8")
+                                    function_entity.set_decorator(decorator)
                     elif body_node.type == "class_definition":
                         class_entity = pythonClassEntity(body_node)
                         file_entity.set_class_entity(class_entity)
@@ -602,6 +604,5 @@ def parse_python_file(path):
             return file_entity
     except UnicodeDecodeError:
         print(f"UnicodeDecodeError: {path}, skip this file")
-        raise
     except RecursionError:
         print(f"RecursionError: {path}, skip this file")
