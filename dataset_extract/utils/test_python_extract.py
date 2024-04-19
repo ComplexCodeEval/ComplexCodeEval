@@ -66,4 +66,9 @@ def match_functions_and_tests(file_parsers):
                                 match_result[function_entity].append(test_function_entity)
                             else:
                                 match_result[function_entity] = [test_function_entity]
+    # 内存优化
+    for file_entity in file_parsers:
+        if not file_entity:
+            continue
+        file_entity.clear_index()
     return match_result

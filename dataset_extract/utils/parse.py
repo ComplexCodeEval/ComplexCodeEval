@@ -137,9 +137,8 @@ def parse_java_method(method_entity, class_entity):
     method_entity.set_belong_class(class_entity)
     method_name = method_node.child_by_field_name("name").text.decode("utf-8")
     method_entity.set_method_name(method_name)
-    if method_node.prev_sibling and method_node.prev_sibling.type == "comment":
-        comment = method_node.prev_sibling.text.decode("utf-8")
-        method_entity.set_comment(comment)
+    method_entity.set_left_context(method_node.start_point[0])
+    method_entity.set_right_context(method_node.end_point[0]+1)
     method_parameters = method_node.child_by_field_name("parameters")
     if method_parameters:
         for child in method_parameters.children:
@@ -212,49 +211,40 @@ def parse_java_file(path):
             file_entity = fileEntity(root)
             file_entity.set_file_name(path.split('/')[-1])
             file_entity.set_file_path(path)
-            for child in root.children:
-                if child.type == "class_declaration":
-                    class_entity = classEntity(child)
-                    file_entity.set_class_entity(class_entity)
-                    parse_java_class(class_entity, file_entity)
-                elif child.type == "import_declaration":
-                    for import_package in child.children:
-                        if import_package.type == "scoped_identifier":
-                            import_package_name = import_package.text.decode("utf-8")
-                            file_entity.set_import_text(import_package_name)
-                elif child.type == "package_declaration":
-                    for package in child.children:
-                        if package.type == "scoped_identifier":
-                            package_name = package.text.decode("utf-8")
-                            file_entity.set_package_text(package_name)
-            for class_entity in file_entity.get_class_entity():
-                for method_entity in class_entity.get_method_entity():
-                    if method_entity.get_is_test_method():
-                        file_entity.set_is_test_file()
+            try:
+                for child in root.children:
+                    if child.type == "class_declaration":
+                        class_entity = classEntity(child)
+                        file_entity.set_class_entity(class_entity)
+                        parse_java_class(class_entity, file_entity)
+                    elif child.type == "import_declaration":
+                        for import_package in child.children:
+                            if import_package.type == "scoped_identifier":
+                                import_package_name = import_package.text.decode("utf-8")
+                                file_entity.set_import_text(import_package_name)
+                    elif child.type == "package_declaration":
+                        for package in child.children:
+                            if package.type == "scoped_identifier":
+                                package_name = package.text.decode("utf-8")
+                                file_entity.set_package_text(package_name)
+                for class_entity in file_entity.get_class_entity():
+                    for method_entity in class_entity.get_method_entity():
+                        if method_entity.get_is_test_method():
+                            file_entity.set_is_test_file()
+                            break
+                    if file_entity.get_is_test_file():
                         break
-                if file_entity.get_is_test_file():
-                    break
-            for class_entity in file_entity.get_class_entity():
-                for method_entity in class_entity.get_method_entity():
-                    method_node = method_entity.get_node()
-                    file.seek(0)
-                    lines = file.readlines()
-                    start = method_node.prev_sibling.start_point[0] if method_entity.get_comment() else \
-                        method_node.start_point[0]
-                    end = method_node.end_point[0] + 1
-                    method_entity.set_left_context(''.join(lines[:start]))
-                    method_entity.set_right_context(''.join(lines[end:]))
+            except RecursionError:
+                file_entity.clear_node()
+                file_entity.clear_index()
+                print(f"RecursionError: {path}, skip this file")
+                file.close()
+                return     
             #内存优化
-            file_entity.node = None
-            for class_entity in file_entity.get_class_entity():
-                class_entity.node = None
-                for method_entity in class_entity.get_method_entity():
-                    method_entity.node = method_entity.get_node().text.decode("utf-8")
+            file_entity.clear_node()
             return file_entity
     except UnicodeDecodeError:
         print(f"UnicodeDecodeError: {path}, skip this file")
-    except RecursionError:
-        print(f"RecursionError: {path}, skip this file")
 
 
 # 解析python文件中的api调用
@@ -441,16 +431,20 @@ def parse_python_function(node, function_entity):
                 parameter_entity.set_parameter_name(child.text.decode("utf-8"))
     start = function_body.start_point[0]
     end = function_body.end_point[0]
+    function_entity.set_left_context(node.start_point[0])
+    function_entity.set_right_context(node.end_point[0]+1)
+    function_entity.set_comment(tuple((node.start_point[0], node.start_point[0])))
     if function_child := function_body.child(0):
         if function_child.type == "expression_statement":
             if comment := function_child.child(0):
                 if comment.type == "string":
-                    function_entity.set_comment(comment.text.decode("utf-8"))
+                    function_entity.set_comment(tuple((comment.start_point[0], comment.end_point[0]+1)))
                     start = comment.start_point[0]
     if function_entity.get_is_test_function() or (end - start) > 10:
         parse_python_function_body(function_body, function_entity)
         return True
     else:
+        return True
         return False
 
 
@@ -498,111 +492,92 @@ def parse_python_file(path):
             file_name = file_entity.get_file_name()
             if file_name.lower().startswith("test") or file_name.lower().endswith("test"):
                 file_entity.set_is_test_file()
-            for node in root.children:
-                if node.type == "import_from_statement":
-                    module = node.child_by_field_name("module_name")
-                    if module.type == "dotted_name":
-                        module_name = module.text.decode("utf-8")
-                        for child in node.children:
-                            if child.type == "dotted_name" and child.prev_sibling.type != "from":
-                                child_name = child.text.decode("utf-8")
-                                file_entity.set_import_text(module_name + "." + child_name)
-                                file_entity.set_variables(child_name, module_name + "." + child_name)
-                            elif child.type == "aliased_import":
-                                child_name = child.child_by_field_name("name").text.decode("utf-8")
-                                child_alias = child.child_by_field_name("alias").text.decode("utf-8")
-                                file_entity.set_import_text(module_name + "." + child_name)
-                                file_entity.set_variables(child_alias, module_name + "." + child_name)
-                    elif module.type == "relative_import":
-                        module_name = module.text.decode("utf-8")
-                        if module_name == ".":
-                            module_name = path.split('/')[-2]
-                        elif module_name == "..":
-                            module_name = path.split('/')[-3]
-                        else:
-                            continue
-                        for child in node.children:
-                            if child.type == "dotted_name":
-                                child_name = child.text.decode("utf-8")
-                                file_entity.set_variables(child_name, module_name + "." + child_name)
-                            elif child.type == "aliased_import":
-                                child_name = child.child_by_field_name("name").text.decode("utf-8")
-                                child_alias = child.child_by_field_name("alias").text.decode("utf-8")
-                                file_entity.set_variables(child_alias, module_name + "." + child_name)
-                elif node.type == "import_statement":
-                    module = node.child_by_field_name("name")
-                    while module is not None:
-                        if module.type == "aliased_import":
-                            child_name = module.child_by_field_name("name").text.decode("utf-8")
-                            child_alias = module.child_by_field_name("alias").text.decode("utf-8")
-                            file_entity.set_import_text(child_name)
-                            file_entity.set_variables(child_alias, child_name)
-                        elif module.type == "dotted_name":
+            try :
+                for node in root.children:
+                    if node.type == "import_from_statement":
+                        module = node.child_by_field_name("module_name")
+                        if module.type == "dotted_name":
                             module_name = module.text.decode("utf-8")
-                            file_entity.set_import_text(module_name)
-                            file_entity.set_variables(module_name, module_name)
-                        module = module.next_named_sibling
-                elif node.type == "function_definition":
-                    function_entity = pythonFunctionEntity(node)
-                    function_entity.set_belong_file(file_entity)
-                    if parse_python_function(node, function_entity):
-                        file_entity.set_function_entity(function_entity)
-                elif node.type == "class_definition":
-                    class_entity = pythonClassEntity(node)
-                    file_entity.set_class_entity(class_entity)
-                    class_entity.set_belong_file(file_entity)
-                    parse_python_class(node, class_entity)
-                elif node.type == "decorated_definition":
-                    body_node = node.child_by_field_name("definition")
-                    if body_node.type == "function_definition":
-                        function_entity = pythonFunctionEntity(body_node)
+                            for child in node.children:
+                                if child.type == "dotted_name" and child.prev_sibling.type != "from":
+                                    child_name = child.text.decode("utf-8")
+                                    file_entity.set_import_text(module_name + "." + child_name)
+                                    file_entity.set_variables(child_name, module_name + "." + child_name)
+                                elif child.type == "aliased_import":
+                                    child_name = child.child_by_field_name("name").text.decode("utf-8")
+                                    child_alias = child.child_by_field_name("alias").text.decode("utf-8")
+                                    file_entity.set_import_text(module_name + "." + child_name)
+                                    file_entity.set_variables(child_alias, module_name + "." + child_name)
+                        elif module.type == "relative_import":
+                            module_name = module.text.decode("utf-8")
+                            if module_name == ".":
+                                module_name = path.split('/')[-2]
+                            elif module_name == "..":
+                                module_name = path.split('/')[-3]
+                            else:
+                                continue
+                            for child in node.children:
+                                if child.type == "dotted_name":
+                                    child_name = child.text.decode("utf-8")
+                                    file_entity.set_variables(child_name, module_name + "." + child_name)
+                                elif child.type == "aliased_import":
+                                    child_name = child.child_by_field_name("name").text.decode("utf-8")
+                                    child_alias = child.child_by_field_name("alias").text.decode("utf-8")
+                                    file_entity.set_variables(child_alias, module_name + "." + child_name)
+                    elif node.type == "import_statement":
+                        module = node.child_by_field_name("name")
+                        while module is not None:
+                            if module.type == "aliased_import":
+                                child_name = module.child_by_field_name("name").text.decode("utf-8")
+                                child_alias = module.child_by_field_name("alias").text.decode("utf-8")
+                                file_entity.set_import_text(child_name)
+                                file_entity.set_variables(child_alias, child_name)
+                            elif module.type == "dotted_name":
+                                module_name = module.text.decode("utf-8")
+                                file_entity.set_import_text(module_name)
+                                file_entity.set_variables(module_name, module_name)
+                            module = module.next_named_sibling
+                    elif node.type == "function_definition":
+                        function_entity = pythonFunctionEntity(node)
                         function_entity.set_belong_file(file_entity)
-                        if parse_python_function(body_node, function_entity):
+                        if parse_python_function(node, function_entity):
                             file_entity.set_function_entity(function_entity)
-                            for children in node.children:
-                                if children.type == "decorator":
-                                    decorator = children.text.decode("utf-8")
-                                    function_entity.set_decorator(decorator)
-                    elif body_node.type == "class_definition":
-                        class_entity = pythonClassEntity(body_node)
+                    elif node.type == "class_definition":
+                        class_entity = pythonClassEntity(node)
                         file_entity.set_class_entity(class_entity)
                         class_entity.set_belong_file(file_entity)
-                        parse_python_class(body_node, class_entity)
-                    for child in node.children:
-                        if child.type == "decorator":
-                            decorator = child.text.decode("utf-8")
-                            if body_node.type == "function_definition":
-                                function_entity.set_decorator(decorator)
-                            elif body_node.type == "class_definition":
-                                class_entity.set_decorator(decorator)
-            for class_entity in file_entity.get_class_entity():
-                if class_entity:
-                    for function_entity in class_entity.get_function_entity():
-                        function_node = function_entity.get_node()
-                        file.seek(0)
-                        lines = file.readlines()
-                        start = function_node.start_point[0]
-                        end = function_node.end_point[0] + 1
-                        function_entity.set_left_context(''.join(lines[:start]))
-                        function_entity.set_right_context(''.join(lines[end:]))
-            for function_entity in file_entity.get_function_entity():
-                function_node = function_entity.get_node()
-                file.seek(0)
-                lines = file.readlines()
-                start = function_node.start_point[0]
-                end = function_node.end_point[0] + 1
-                function_entity.set_left_context(''.join(lines[:start]))
-                function_entity.set_right_context(''.join(lines[end:]))
+                        parse_python_class(node, class_entity)
+                    elif node.type == "decorated_definition":
+                        body_node = node.child_by_field_name("definition")
+                        if body_node.type == "function_definition":
+                            function_entity = pythonFunctionEntity(body_node)
+                            function_entity.set_belong_file(file_entity)
+                            if parse_python_function(body_node, function_entity):
+                                file_entity.set_function_entity(function_entity)
+                                for children in node.children:
+                                    if children.type == "decorator":
+                                        decorator = children.text.decode("utf-8")
+                                        function_entity.set_decorator(decorator)
+                        elif body_node.type == "class_definition":
+                            class_entity = pythonClassEntity(body_node)
+                            file_entity.set_class_entity(class_entity)
+                            class_entity.set_belong_file(file_entity)
+                            parse_python_class(body_node, class_entity)
+                        for child in node.children:
+                            if child.type == "decorator":
+                                decorator = child.text.decode("utf-8")
+                                if body_node.type == "function_definition":
+                                    function_entity.set_decorator(decorator)
+                                elif body_node.type == "class_definition":
+                                    class_entity.set_decorator(decorator)
+            except RecursionError:
+                file_entity.clear_node()
+                file_entity.clear_index()
+                print(f"RecursionError: {path}, skip this file")
+                file.close()
+                return
             #内存优化
-            file_entity.node = None
-            for class_entity in file_entity.get_class_entity():
-                class_entity.node = None
-                for function_entity in class_entity.get_function_entity():
-                    function_entity.node = function_entity.get_node().text.decode("utf-8")
-            for function_entity in file_entity.get_function_entity():
-                function_entity.node = function_entity.get_node().text.decode("utf-8")
+            file_entity.clear_node()
             return file_entity
     except UnicodeDecodeError:
         print(f"UnicodeDecodeError: {path}, skip this file")
-    except RecursionError:
-        print(f"RecursionError: {path}, skip this file")

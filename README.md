@@ -2,7 +2,7 @@
 
 ## Project Introduction
 
-This project aims to download projects from remote repositories based on the provided repository information table (XLS or XLSX file), parse the projects, and generate datasets. The provided table should contain the following fields: `git_group`, `git_name`, `language`, `version`, `download_url`, `file_name`, `update_time`, and `create_time`.An example of a remote repository information table can be found in [analysis_repo_dependency/analysis_repo_dependency1.xls](analysis_repo_dependency/analysis_repo_dependency1.xls).
+The aim of this project is to crawl high-star GitHub projects, parse their dependency information, determine whether they depend on the APIs specified in `/setup/profile.yaml`, build a remote project dependency table, then retrieve project-related information from the dependency table, parse the projects, and generate the final dataset. Users can also provide project dependency tables (XLS or XLSX files). The tables provided by users should include the following fields: `git_group`, `git_name`, `language`, `version`, `download_url`, `file_name`, `update_time`, and `create_time`. An example of the remote repository information table can be found at [analysis_repo_dependency/analysis_repo_dependency1.xls](analysis_repo_dependency/analysis_repo_dependency1.xls).
 
 ### Fields for Java Dataset
 
@@ -54,6 +54,7 @@ This project aims to download projects from remote repositories based on the pro
 
 ### Key Features
 
+- Crawl high-star GitHub projects and analyze their dependencies.
 - Obtain project information from the remote repository information table and download projects.
 - Parse projects and analyze API call situations.
 - Based on the API call frequency of the corresponding framework, extract datasets containing test functions.
@@ -61,8 +62,7 @@ This project aims to download projects from remote repositories based on the pro
 
 ### How to Use
 
-1. Prepare the remote repository information table and place it in the path specified by `/setup/profile.yaml`.
-2. Run the tool:
+Run the tool:
 ```sh
 python3 -m dataset_extract
 ```

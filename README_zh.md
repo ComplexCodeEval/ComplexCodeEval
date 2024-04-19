@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-本项目旨在通过用户提供的远程仓库信息表（XLS 或者 XLSX 文件），从指定的下载链接下载项目，并解析项目，最终生成数据集。用户提供的表格应包含如下字段：`git_group`、`git_name`、`language`、`version`、`download_url`、`file_name`、`update_time` 和 `create_time`。一个示例的远程仓库信息表可见[analysis_repo_dependency/analysis_repo_dependency1.xls](analysis_repo_dependency/analysis_repo_dependency1.xls)。
+本项目旨在爬取GitHub的高星项目，并解析项目依赖信息，判断其是否依赖于`/setup/profile.yaml`中指定的API，从而构建远程项目依赖表，再从依赖表中获取项目相关信息，并解析项目，生成最终数据集。用户也可自行提供项目依赖表（XLS 或者 XLSX 文件）用户提供的表格应包含如下字段：`git_group`、`git_name`、`language`、`version`、`download_url`、`file_name`、`update_time` 和 `create_time`。一个示例的远程仓库信息表可见[analysis_repo_dependency/analysis_repo_dependency1.xls](analysis_repo_dependency/analysis_repo_dependency1.xls)。
 
 ### Java 数据集字段
 
@@ -55,6 +55,7 @@
 
 ### 功能特点
 
+- 爬取GitHub高星项目，并分析其依赖情况
 - 从远程仓库信息表中获取项目信息，并下载项目。
 - 解析项目，分析出其中的 API 调用情况。
 - 根据对应框架的 API 调用频率，再次解析项目，提取出对应api的包含测试函数的数据集。
@@ -62,8 +63,7 @@
 
 ### 如何使用
 
-1. 用户准备远程仓库信息表，将其放入`/setup/profile.yaml`指定的`xls_path`的路径中。
-2. 运行工具
+运行工具
 ```sh
 python3 -m dataset_extract
 ```

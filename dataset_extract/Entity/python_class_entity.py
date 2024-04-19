@@ -10,6 +10,16 @@ class pythonClassEntity:
         self.decorator = []
         self.is_test_class = False
 
+    def clear_node(self):
+        for function_entity in self.function_entity:
+            function_entity.clear_node()
+        self.node = None
+    
+    def clear_index(self):
+        for function_entity in self.function_entity:
+            function_entity.clear_index()
+        self.function_entity = None
+
     def to_dict(self):
         class_dict = self.__dict__.copy()
         class_dict.pop('node', None)

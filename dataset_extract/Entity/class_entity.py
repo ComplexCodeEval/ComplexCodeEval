@@ -11,6 +11,26 @@ class classEntity:
         self.belong_file = None
         self.comment = None
 
+    def clear_node(self):
+        for method_entity in self.method_entity:
+            method_entity.clear_node()
+        for class_entity in self.class_entity:
+            class_entity.clear_node()
+        for variable_entity in self.variable_entity:
+            variable_entity.clear_node()
+        self.node = None
+
+    def clear_index(self):
+        for method_entity in self.method_entity:
+            method_entity.clear_index()
+        for class_entity in self.class_entity:
+            class_entity.clear_index()
+        for variable_entity in self.variable_entity:
+            variable_entity.clear_index()
+        self.method_entity = None
+        self.class_entity = None
+        self.variable_entity = None
+
     def to_dict(self):
         class_dict = self.__dict__.copy()
         class_dict.pop('node', None)

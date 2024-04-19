@@ -7,6 +7,12 @@ class pythonCallEntity:
         self.parameter = None
         self.belong_function = None
 
+    def clear_node(self):
+        self.node = None
+
+    def clear_index(self):
+        self.belong_function = None
+
     def to_dict(self):
         class_dict = self.__dict__.copy()
         class_dict.pop('node', None)

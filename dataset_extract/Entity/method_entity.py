@@ -15,6 +15,23 @@ class methodEntity:
         self.left_context = None
         self.method_signature = None
 
+    def clear_node(self):
+        for parameter_entity in self.parameter_entity:
+            parameter_entity.clear_node()
+        for variable_entity in self.variable_entity:
+            variable_entity.clear_node()
+        for call_method in self.call_method:
+            call_method.clear_node()
+        self.node = None
+    
+    def clear_index(self):
+        for parameter_entity in self.parameter_entity:
+            parameter_entity.clear_index()
+        for variable_entity in self.variable_entity:
+            variable_entity.clear_index()
+        for call_method in self.call_method:
+            call_method.clear_index()
+
     def to_dict(self):
         class_dict = self.__dict__.copy()
         class_dict.pop('node', None)
@@ -87,11 +104,17 @@ class methodEntity:
     def get_is_test_method(self):
         return self.is_test_method
 
+    def get_code(self):
+        file_context = self.belong_class.belong_file.node
+        return '\n'.join(file_context[self.left_context:self.right_context])
+
     def get_right_context(self):
-        return self.right_context
+        file_context = self.belong_class.belong_file.node
+        return '\n'.join(file_context[self.right_context:])
 
     def get_left_context(self):
-        return self.left_context
+        file_context = self.belong_class.belong_file.node
+        return '\n'.join(file_context[:self.left_context])
 
     def get_method_signature(self):
         return self.method_signature

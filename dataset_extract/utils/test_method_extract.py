@@ -49,4 +49,9 @@ def match_methods_and_tests(file_parsers):
                         match_result[method_entity].append(test_call_method)
                     else:
                         match_result[method_entity] = [test_call_method]
+    #内存优化
+    for file_entity in file_parsers:
+        if not file_entity:
+            continue
+        file_entity.clear_index()
     return match_result

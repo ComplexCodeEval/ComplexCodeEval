@@ -7,6 +7,16 @@ class callMethodEntity:
         self.parameter_entity = []
         self.belong_method = None
 
+    def clear_node(self):
+        for parameter_entity in self.parameter_entity:
+            parameter_entity.clear_node()
+        self.node = None
+
+    def clear_index(self):
+        for parameter_entity in self.parameter_entity:
+            parameter_entity.clear_index()
+        self.belong_method = None
+
     def to_dict(self):
         class_dict = self.__dict__.copy()
         class_dict.pop('node', None)

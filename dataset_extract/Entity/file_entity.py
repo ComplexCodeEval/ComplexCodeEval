@@ -13,6 +13,22 @@ class fileEntity:
         self.is_test_file = False
         self.module_name = None
 
+    def clear_node(self):
+        for class_entity in self.class_entity:
+            class_entity.clear_node()
+        for function_entity in self.function_entity:
+            function_entity.clear_node()
+        self.node = self.node.text.decode('utf-8').split('\n')
+
+    def clear_index(self):
+        for class_entity in self.class_entity:
+            class_entity.clear_index()
+        for function_entity in self.function_entity:
+            function_entity.clear_index()
+        self.variables = None
+        self.class_entity = None
+        self.function_entity = None
+
     def to_dict(self):
         class_dict = self.__dict__.copy()
         class_dict.pop('node', None)

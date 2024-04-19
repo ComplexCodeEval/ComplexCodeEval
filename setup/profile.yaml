@@ -4,7 +4,7 @@ csv_path: ./csv_files  # store the intermediate analysis results of each API
 
 json_path: ./json_files  # store the final dataset of each API
 
-xls_path: ./analysis_repo_dependency  # you need to provide the xls or xlsx file of the remote repository in this directory
+xls_path: ./analysis_repo_dependency  # you can provide the xls or xlsx file of the remote repository in this directory
 
 repo_path: ./repositories # store remote code repositories
 
@@ -15,6 +15,7 @@ remove_repo: false  # If true, the code repository will be removed after the ana
 remove_csv: false  # If true, the intermediate analysis results of each API will be removed after the analysis
 
 API:
+# Java
   - name: Spring
     accept:
       - org.springframework
@@ -305,4 +306,225 @@ API:
     accept:
       - io.netty
     reject: []
+# # Python
+#   - name: requests  
+#     accept:  
+#       - requests  
+#     reject: []  
+#   - name: numpy  
+#     accept:  
+#       - numpy  
+#     reject: []  
+#   - name: pandas  
+#     accept:  
+#       - pandas  
+#     reject: []  
+#   - name: Django  
+#     accept:  
+#       - django  
+#     reject: []  
+#   - name: Flask  
+#     accept:  
+#       - flask  
+#     reject: []  
+#   - name: scikit-learn  
+#     accept:  
+#       - sklearn  
+#     reject: []  
+#   - name: matplotlib  
+#     accept:  
+#       - matplotlib  
+#     reject: []  
+#   - name: SQLAlchemy  
+#     accept:  
+#       - sqlalchemy  
+#     reject: []  
+#   - name: torch  
+#     accept:  
+#       - torch  
+#     reject: []  
+#   - name: scipy  
+#     accept:  
+#       - scipy  
+#     reject: []  
+#   - name: IPython  
+#     accept:  
+#       - IPython  
+#     reject: []  
+#   - name: Jinja2  
+#     accept:  
+#       - jinja2  
+#     reject: []
+#   - name: networkx  
+#     accept:  
+#       - networkx  
+#     reject: []  
+#   - name: aiohttp  
+#     accept:  
+#       - aiohttp  
+#     reject: []  
+#   - name: attrs  
+#     accept:  
+#       - attrs  
+#     reject: []  
+#   - name: mypy  
+#     accept:  
+#       - mypy  
+#     reject: []  
+#   - name: coverage  
+#     accept:  
+#       - coverage  
+#     reject: []  
+#   - name: boto3  
+#     accept:  
+#       - boto3  
+#     reject: []  
+#   - name: redis  
+#     accept:  
+#       - redis  
+#     reject: []  
+#   - name: tqdm  
+#     accept:  
+#       - tqdm  
+#     reject: []  
+#   - name: chardet  
+#     accept:  
+#       - chardet  
+#     reject: []  
+#   - name: Werkzeug  
+#     accept:  
+#       - werkzeug  
+#     reject: []  
+#   - name: joblib  
+#     accept:  
+#       - joblib  
+#     reject: []  
+#   - name: PyYAML  
+#     accept:  
+#       - pyyaml  
+#     reject: []  
+#   - name: transformers  
+#     accept:  
+#       - transformers  
+#     reject: []  
+#   - name: pyspark  
+#     accept:  
+#       - pyspark  
+#     reject: []
+#   - name: grpcio  
+#     accept:  
+#       - grpcio  
+#     reject: []  
+#   - name: opencv-python  
+#     accept:  
+#       - cv2  
+#     reject: []  
+#   - name: Scrapy  
+#     accept:  
+#       - scrapy  
+#     reject: []  
+#   - name: scikit-image  
+#     accept:  
+#       - skimage  
+#     reject: []  
+#   - name: djangorestframework  
+#     accept:  
+#       - rest_framework  
+#     reject: []  
+#   - name: Cython  
+#     accept:  
+#       - cython  
+#     reject: []  
+#   - name: notebook  
+#     accept:  
+#       - notebook  
+#     reject: []  
+#   - name: peewee  
+#     accept:  
+#       - peewee  
+#     reject: []  
+#   - name: seaborn  
+#     accept:  
+#       - seaborn  
+#     reject: []  
+#   - name: packaging  
+#     accept:  
+#       - packaging  
+#     reject: []  
+#   - name: h5py  
+#     accept:  
+#       - h5py  
+#     reject: []  
+#   - name: celery  
+#     accept:  
+#       - celery  
+#     reject: []  
+#   - name: sympy  
+#     accept:  
+#       - sympy  
+#     reject: []
+#   - name: fastapi  
+#     accept:  
+#       - fastapi  
+#     reject: []  
+#   - name: pydantic  
+#     accept:  
+#       - pydantic  
+#     reject: []  
+#   - name: marshmallow  
+#     accept:  
+#       - marshmallow  
+#     reject: []  
+#   - name: pybind11  
+#     accept:  
+#       - pybind11  
+#     reject: []  
+#   - name: moto  
+#     accept:  
+#       - moto  
+#     reject: []  
+#   - name: sqlparse  
+#     accept:  
+#       - sqlparse  
+#     reject: []  
+#   - name: bokeh  
+#     accept:  
+#       - bokeh  
+#     reject: []  
+#   - name: freezegun  
+#     accept:  
+#       - freezegun  
+#     reject: []  
+#   - name: sanic  
+#     accept:  
+#       - sanic  
+#     reject: []  
+#   - name: geopy  
+#     accept:  
+#       - geopy  
+#     reject: []  
+#   - name: ujson  
+#     accept:  
+#       - ujson  
+#     reject: []  
+#   - name: dask  
+#     accept:  
+#       - dask  
+#     reject: []  
+#   - name: selenium  
+#     accept:  
+#       - selenium  
+#     reject: []  
+#   - name: loguru  
+#     accept:  
+#       - loguru  
+#     reject: []  
+#   - name: nose  
+#     accept:  
+#       - nose  
+#     reject: []  
+#   - name: PyGithub  
+#     accept:  
+#       - github 
+#     reject: []
 #The API you want to analyze, you can add more APIs in the list. The 'accept' field is the package name of the API you want to analyze, and the 'reject' field is the package name you want to exclude.

@@ -64,20 +64,18 @@ def java_result_gen(match_result, api, count_api, api_json, xls_df, git_name, pr
                             result_entity.set_focal_name(method_entity.get_method_name())
                             for parameter_entity in method_entity.get_parameter_entity():
                                 result_entity.set_focal_parameter(parameter_entity.get_parameter_type())
-                            result_entity.set_solution(method_entity.get_node())
+                            result_entity.set_solution(method_entity.get_code())
                             result_entity.set_method_signature(method_entity.get_method_signature())
                             result_entity.set_left_context(method_entity.get_left_context())
                             result_entity.set_right_context(method_entity.get_right_context())
                             for test_method in match_result[method_entity]:
-                                result_entity.set_test_function(test_method.get_node())
+                                result_entity.set_test_function(test_method.get_code())
                             result_entity.set_class_comment(class_entity.get_comment())
                             for import_text in import_texts:
                                 result_entity.set_import_text(import_text)
-                            result_entity.set_prompt(method_entity.get_comment())
-                            if not result_entity.get_prompt():
-                                result_entity.set_prompt(
-                                    gen_comment_from_api(result_entity.get_solution(), api, language="java"))
-                                result_entity.set_is_gen_from_api()
+                            result_entity.set_prompt(
+                                gen_comment_from_api(result_entity.get_solution(), api, language="java"))
+                            result_entity.set_is_gen_from_api()
                             api_json.append(vars(result_entity))
                             flag = True
                             break
@@ -123,18 +121,17 @@ def python_result_gen(match_result, api, count_api, api_json, xls_df, git_name, 
                     result_entity.set_focal_name(function_entity.get_function_name())
                     for parameter_entity in function_entity.get_parameter_entity():
                         result_entity.set_focal_parameter(parameter_entity.get_parameter_name())
-                    result_entity.set_solution(function_entity.get_node())
+                    result_entity.set_solution(function_entity.get_code())
                     result_entity.set_function_signature(function_entity.get_function_signature())
                     result_entity.set_left_context(function_entity.get_left_context())
                     result_entity.set_right_context(function_entity.get_right_context())
                     for test_function_entity in match_result[function_entity]:
-                        result_entity.set_test_function(test_function_entity.get_node())
+                        result_entity.set_test_function(test_function_entity.get_code())
                     for import_text in file_entity.get_import_text():
                         result_entity.set_import_text(import_text)
-                    result_entity.set_prompt(function_entity.get_comment())
-                    if not result_entity.get_prompt():
-                        result_entity.set_prompt(gen_comment_from_api(result_entity.get_solution(), api, language="python"))
-                        result_entity.set_is_gen_from_api()
+                    result_entity.set_prompt(
+                        gen_comment_from_api(result_entity.get_solution(), api, language="python"))
+                    result_entity.set_is_gen_from_api()
                     api_json.append(vars(result_entity))
                     flag = True
                     break

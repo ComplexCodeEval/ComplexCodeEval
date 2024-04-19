@@ -6,6 +6,12 @@ class parameterEntity:
         self.parameter_name = None
         self.parameter_type = None
 
+    def clear_node(self):
+        self.node = None
+
+    def clear_index(self):
+        pass
+
     def to_dict(self):
         class_dict = self.__dict__.copy()
         class_dict.pop('node', None)
