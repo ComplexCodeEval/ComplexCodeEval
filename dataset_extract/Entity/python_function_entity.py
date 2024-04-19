@@ -21,7 +21,7 @@ class pythonFunctionEntity:
             parameter_entity.clear_node()
         for call_method in self.call_method:
             call_method.clear_node()
-        self.node = self.node.text.decode('utf-8')
+        self.node = None
 
     def clear_index(self):
         for parameter_entity in self.parameter_entity:
