@@ -40,11 +40,19 @@ def get_token():
 
 def make_request(url):
     global last_request_time, failed_tokens
-    headers = {
-        'Authorization': f'token {get_token()}',
-        'Accept': 'application/vnd.github.v3+json'
-    }
-    response = requests.get(url, headers=headers)
+    max_retry = 5
+    while max_retry > 0:
+        try:
+            headers = {
+                'Authorization': f'token {get_token()}',
+                'Accept': 'application/vnd.github.v3+json'
+            }
+            response = requests.get(url, headers=headers, timeout=10)
+            break
+        except Exception as e:
+            max_retry -= 1
+            print(f"--->Error: Failed to make request to {url}: {e}")
+            sleep(10)
     get_remaining_points(response.headers)
     if response.status_code == 200:
         return response.json()
@@ -64,11 +72,19 @@ def make_request(url):
 
 def make_rest_request(url):
     global last_request_time, failed_tokens
-    headers = {
-        'Authorization': f'token {get_token()}',
-        'Accept': 'application/vnd.github.v3+json'
-    }
-    response = requests.get(url, headers=headers)
+    max_retry = 5
+    while True:
+        try:
+            headers = {
+                'Authorization': f'token {get_token()}',
+                'Accept': 'application/vnd.github.v3+json'
+            }
+            response = requests.get(url, headers=headers, timeout=10)
+            break
+        except Exception as e:
+            max_retry -= 1
+            print(f"--->Error: Failed to make request to {url}: {e}")
+            sleep(10)
     get_remaining_points(response.headers)
     if response.status_code == 200:
         if 'next' in response.links:
@@ -94,12 +110,20 @@ def make_rest_request(url):
 
 def make_graphql_request(query, variables):
     global last_request_time, failed_tokens
-    headers = {
-        'Authorization': f'token {get_token()}',
-        'Accept': 'application/json'
-    }
     data = {'query': query, 'variables': variables}
-    response = requests.post('https://api.github.com/graphql', json=data, headers=headers)
+    max_retry = 5
+    while True:
+        try:
+            headers = {
+                'Authorization': f'token {get_token()}',
+                'Accept': 'application/json'
+            }
+            response = requests.post('https://api.github.com/graphql', json=data, headers=headers, timeout=10)
+            break
+        except Exception as e:
+            max_retry -= 1
+            print(f"--->Error: Failed to make request to GraphQL API: {e}")
+            sleep(10)
     get_remaining_points(response.headers)
     if response.status_code == 200:
         return response.json()
@@ -350,11 +374,12 @@ def grab_repositories(properties):
 
         if not os.path.exists(download_path[:-4]):
             print(f"===>Error: Failed to download project from {download_url}")
-            os.remove(download_path)
+            if os.path.exists(download_path):
+                os.remove(download_path)
             continue
-
         if (parse_dependencies(download_path[:-4], language, specified_dependencies) or
             parse_sbom_dependencies(git_group, git_name, specified_dependencies)):
+            print(f"===>Correct: Found {idx}th project {project['name']}")
             update_time = project['updated_at']
             create_time = project['created_at']
 
@@ -368,7 +393,7 @@ def grab_repositories(properties):
         if os.path.exists(download_path):
             os.remove(download_path)
 
-    file_path = os.path.join(xls_path, f"repositories_{language}.xlsx")
+    file_path = os.path.join(xls_path, f"repositories_{language}_1.xlsx")
     df.to_excel(file_path, index=False)
     print(f"===>Correct: Data saved to {file_path}")
 

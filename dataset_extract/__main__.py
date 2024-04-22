@@ -7,7 +7,7 @@ from time import time
 
 from dataset_extract.repo_api_count_analysis import repo_api_count_analysis
 from dataset_extract.top_api_analysis import top_api_analysis
-from dataset_extract.grab_repositories import grab_repositories
+from dataset_extract.grab_repositories import grab_repositories, resolve_dependencies
 
 
 def read_profile():
@@ -53,6 +53,7 @@ def main():
         sys.exit(1)
     else:
         init_path(properties)
+        # resolve_dependencies(properties)
         grab_repositories(properties)
         repo_api_count_analysis(properties)
         top_api_analysis(properties)
