@@ -180,8 +180,8 @@ def search_projects(language, max_results=60000):
     #         break
     all_projects = []
     base_url = 'https://api.github.com/search/repositories?q=language:{}+stars:{}..{}&sort=stars&order=desc&per_page=100&page=1'
-    mi = 5900
-    ma = 310000
+    mi = 300000
+    ma = 500000
     while True:
         url = base_url.format(language, mi-max(ma//100,1), ma)
         test_response = make_request(url)
