@@ -187,7 +187,6 @@ def search_projects(language, max_results=60000):
         test_response = make_request(url)
         if test_response:
             if test_response['total_count'] > 1000:
-                print(f"===>Test: Found {test_response['total_count']} projects with url {url}")
                 url = base_url.format(language, mi, ma)
                 response_data = make_rest_request(url)
                 if response_data:
@@ -196,7 +195,6 @@ def search_projects(language, max_results=60000):
                     if len(all_projects) >= max_results:
                         break
                     ma = response_data[-1]['stargazers_count']
-                    mi = ma - max(ma//100,1)
                 else:
                     break
             mi -= max(ma//100,1)
