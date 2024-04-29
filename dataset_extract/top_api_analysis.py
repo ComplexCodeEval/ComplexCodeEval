@@ -3,6 +3,7 @@
 import pandas as pd
 import os
 import json
+import psutil
 
 from dataset_extract.utils.repo_utils import download_git_repo, extract_repo
 from dataset_extract.utils.file_utils import get_java_files, get_python_files
@@ -161,6 +162,7 @@ def get_project_parser(project_path, properties):
     except UnicodeDecodeError:
         return None
 
+
 def analysis_top_api(properties, api_count_path, api_count_analysis_path, comment_tested_API_1, comment_tested_API_2):
     xls_path = os.path.abspath(properties["xls_path"])
     repo_path = os.path.abspath(properties["repo_path"])
@@ -180,6 +182,8 @@ def analysis_top_api(properties, api_count_path, api_count_analysis_path, commen
     for api in api_count_analysis_csv_df['api'].values:
         print(f"*****Processing {count_api}th api: {api}*****")
         api_json = []
+        if psutil.virtual_memory().percent > 85:
+            process_project = {}
         for index, row in api_count_csv_df[api_count_csv_df["api"] == api].iterrows():
             project_name = row['project_name']
             git_name = row['git_name']
@@ -218,17 +222,17 @@ def analysis_top_api(properties, api_count_path, api_count_analysis_path, commen
                 java_result_gen(match_result, api, count_api, api_json, xls_df, git_name, project_name, repo_path)
             elif properties["language"] == "Python":
                 python_result_gen(match_result, api, count_api, api_json, xls_df, git_name, project_name, repo_path)
-            if len(api_json) == 10:
+            if len(api_json) == properties['per_api_count']:
                 break
         if len(api_json) > 0:
             count_api += 1
             json_result[api] = api_json
-            if count < 100:
+            if count < properties['per_API_count']:
                 json_result_api[api] = api_json
                 count += 1
-            if count == 100:
+            if count == properties['per_API_count']:
                 count = analysis_result(json_result_api)
-                if count == 100:
+                if count == properties['per_API_count']:
                     break
     analysis_result(json_result_api)
     # total_count = analysis_result(json_result)

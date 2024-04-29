@@ -2,7 +2,8 @@
 
 from openai import OpenAI, BadRequestError
 
-client = OpenAI(api_key="sk-6299c3276293499d8d55e1c32475fd97", base_url="https://api.deepseek.com/v1")
+# api_key需要自己申请
+client = OpenAI(api_key="", base_url="https://api.deepseek.com/v1")
 
 def gen_comment_from_api(code,method,language):
     try:

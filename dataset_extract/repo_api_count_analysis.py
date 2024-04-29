@@ -91,7 +91,8 @@ def repo_api_count_analysis(properties):
             extract_repo(repo_path, filename)
 
         if not os.path.exists(zip_location[:-4]):
-            os.remove(zip_location)
+            if os.path.exists(zip_location):
+                os.remove(zip_location)
             continue
 
         for key, value in get_api(zip_location[:-4], properties):

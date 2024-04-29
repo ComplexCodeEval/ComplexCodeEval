@@ -20,6 +20,20 @@ for lang in ['python', 'java']:
     parser.set_language(LANGUAGE)
     parsers[lang] = parser
 
+#测试code file是否存在语法错误
+def test_error(root):
+    try:
+        if root is None:
+            return False
+        if root.type == "ERROR":
+            return True
+        for child in root.children:
+            if test_error(child):
+                return True
+        return False
+    except RecursionError:
+        return True
+  
 
 # 解析java文件中的api调用
 def analyze_java_class(node):
@@ -208,6 +222,9 @@ def parse_java_file(path):
             code = file.read()
             tree = parsers['java'].parse(bytes(code, 'utf8'))
             root = tree.root_node
+            if test_error(root):
+                print(f"--->Error: SyntaxError: {path}, skip this file")
+                return
             file_entity = fileEntity(root)
             file_entity.set_file_name(path.split('/')[-1])
             file_entity.set_file_path(path)
@@ -412,6 +429,8 @@ def parse_python_function_body(node, function_entity):
 def parse_python_function(node, function_entity):
     function_name = node.child_by_field_name("name").text.decode("utf-8")
     function_body = node.child_by_field_name("body")
+    if not function_body:
+        return False
     function_parameters = node.child_by_field_name("parameters")
     function_entity.set_function_name(function_name)
     function_signature = function_name + function_parameters.text.decode("utf-8")
@@ -431,6 +450,8 @@ def parse_python_function(node, function_entity):
                 parameter_entity.set_parameter_name(child.text.decode("utf-8"))
     start = function_body.start_point[0]
     end = function_body.end_point[0]
+    if end - start < 10:
+        return False
     function_entity.set_left_context(node.start_point[0])
     function_entity.set_right_context(node.end_point[0]+1)
     function_entity.set_comment(tuple((node.start_point[0], node.start_point[0])))
@@ -444,7 +465,6 @@ def parse_python_function(node, function_entity):
         parse_python_function_body(function_body, function_entity)
         return True
     else:
-        return True
         return False
 
 
@@ -455,6 +475,8 @@ def parse_python_class(node, class_entity):
     if class_name.lower().startswith("test") or class_name.lower().endswith("test"):
         class_entity.set_is_test_class()
         class_entity.get_belong_file().set_is_test_file()
+    if not class_body:
+        return
     for child in class_body.children:
         if child.type == "function_definition":
             function_name = child.child_by_field_name("name").text.decode("utf-8")
@@ -486,6 +508,9 @@ def parse_python_file(path):
             code = file.read()
             tree = parsers['python'].parse(bytes(code, 'utf-8'))
             root = tree.root_node
+            if test_error(root):
+                print(f"--->Error: SyntaxError: {path}, skip this file")
+                return
             file_entity = fileEntity(root)
             file_entity.set_file_name(path.split('/')[-1])
             file_entity.set_file_path(path)

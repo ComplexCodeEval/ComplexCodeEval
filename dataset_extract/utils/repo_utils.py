@@ -3,10 +3,12 @@
 import requests
 import os
 import zipfile
+import urllib.parse
 
 
 def download_git_repo(download_url, repo_path, file_name, retry=0, timeout=120):
     try:
+        download_url = urllib.parse.quote(download_url, safe=':/')
         with requests.get(download_url, stream=True, timeout = timeout) as response:
             response.raise_for_status()  # 检查响应状态码
             with open(os.path.join(repo_path, file_name), 'wb') as f:
@@ -38,3 +40,5 @@ def extract_repo(repo_path, file_name):
             zip_ref.extractall(extract_path)
     except zipfile.BadZipFile:
         print(f"--->Error: BadZipFile: {file_path}, skip this file")
+    except OSError as e:
+        print(f"--->Error: {e}")

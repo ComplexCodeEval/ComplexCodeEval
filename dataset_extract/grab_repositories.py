@@ -10,6 +10,7 @@ from datetime import datetime
 from time import sleep
 from xml.etree import ElementTree as ET
 import json
+import urllib.parse
 
 from dataset_extract.utils.repo_utils import download_git_repo, extract_repo
 from dataset_extract.utils.repo_dependency_utils import  get_repo_dependency
@@ -32,15 +33,16 @@ def get_remaining_points(headers):
 
 def get_token():
     global token_index
-    token_index = (token_index + 1) % len(tokens)
     if tokens == []:
         return None
+    token_index = (token_index + 1) % len(tokens)
     return tokens[token_index]
 
 
 def make_request(url):
     global last_request_time, failed_tokens
     max_retry = 5
+    url = urllib.parse.quote(url, safe=':/?&=+')
     while max_retry > 0:
         try:
             headers = {
@@ -180,7 +182,7 @@ def search_projects(language, max_results=60000):
     #         break
     all_projects = []
     base_url = 'https://api.github.com/search/repositories?q=language:{}+stars:{}..{}&sort=stars&order=desc&per_page=100&page=1'
-    mi = 300000
+    mi = 100000
     ma = 500000
     while True:
         url = base_url.format(language, mi-max(ma//100,1), ma)
@@ -194,7 +196,7 @@ def search_projects(language, max_results=60000):
                     all_projects.extend(response_data)
                     if len(all_projects) >= max_results:
                         break
-                    ma = response_data[-1]['stargazers_count']
+                    ma = response_data[-1]['stargazers_count'] - 1
                 else:
                     break
             mi -= max(ma//100,1)
@@ -243,11 +245,15 @@ def parse_pom_xml(project_name, pom_content):
     try:
         dependencies = []
         root = ET.fromstring(pom_content)
-        for dependency in root.findall('.//dependency'):
-            groupId = dependency.find('groupId').text.strip()
-            artifactId = dependency.find('artifactId').text.strip()
-            version = dependency.find('version').text.strip()
-            dependencies.append(f"{groupId}:{artifactId}:{version}")
+        ns = {'ns': root.tag.split('}')[0][1:]}  # 提取命名空间
+        for dependency in root.findall('.//ns:dependency', ns):
+            groupId_element = dependency.find('ns:groupId', ns)
+            artifactId_element = dependency.find('ns:artifactId', ns)
+            groupId = groupId_element.text.strip() if groupId_element is not None else ""
+            artifactId = artifactId_element.text.strip() if artifactId_element is not None else ""
+            if groupId or artifactId:
+                dependency = f"{groupId}:{artifactId}"
+                dependencies.append(dependency.lower().replace('-', '.'))
         return dependencies
     except Exception as e:
         return []
@@ -283,7 +289,7 @@ def parse_sbom_dependencies(owner, repo, specified_dependencies):
                             return True
                 elif name.startswith('maven:'):
                     for db in specified_dependencies:
-                        if db in name.replace('maven:', '', 1).lower():
+                        if db in name.replace('maven:', '', 1).lower().replace('-', '.'):
                             print(f"===>Correct: Project {repo} depends on one of the specified dependencies: {db}")
                             return True  
         print(f"--->Error: Project {repo} does not depend on any of the specified dependencies or SBOM is not available") 
@@ -322,7 +328,7 @@ def parse_dependencies(repo_path, language, specified_dependencies):
             if ad is None:
                 continue
             for db in specified_dependencies:
-                if db in ad:
+                if db in ad.lower():
                     print(f"===>Correct: Project {project_name} depends on one of the specified dependencies: {db}")
                     return True
         print(f"--->Error: Project {project_name} does not depend on any of the specified dependencies")
@@ -332,19 +338,33 @@ def parse_dependencies(repo_path, language, specified_dependencies):
         return False
 
 
+def get_repo_tag(owner, repo):
+    url = f"https://api.github.com/repos/{owner}/{repo}/tags"
+    response_data = make_request(url)
+    if response_data:
+        return response_data[0]['name']
+    return None
+
+
 def grab_repositories(properties):
     repo_path = os.path.abspath(properties["repo_path"])
     xls_path = os.path.abspath(properties["xls_path"])
     language = properties["language"]
     specified_dependencies = []
-    for dependency in properties["API"]:
-        specified_dependencies.append(dependency["name"].lower())
+    if language == 'Python':
+        for dependency in properties["API"]:
+            specified_dependencies.append(dependency["name"].lower())
+    elif language == 'Java':
+        for dependency in properties["API"]:
+            specified_dependencies.append(dependency["name"].lower().replace('_', '.').replace('-', '.'))
+            for accept in dependency["accept"]:
+                specified_dependencies.append(accept.lower())
 
     df = pd.DataFrame(columns=['id', 'git_group', 'git_name', 'language', 'version', 'download_url', 'file_name', 'update_time', 'create_time'])
 
     file_path = os.path.join(xls_path, f"repositories_{language}.json")
     if not os.path.exists(file_path):
-        projects = search_projects(language)
+        projects = search_projects(language, properties['max_repo_count'])
         with open(file_path, 'w') as f:
             json.dump(projects, f, indent=2, ensure_ascii=False)
     else:
@@ -360,10 +380,13 @@ def grab_repositories(properties):
             continue
         git_group = project['owner']['login']
         git_name = project['name']
-        version = project.get('default_branch', '')
+        if tag_name := get_repo_tag(git_group, git_name):
+            version = tag_name
+            download_url = f"https://codeload.github.com/{git_group}/{git_name}/zip/refs/tags/{version}"
+        else:
+            version = project.get('default_branch', '')
+            download_url = f"https://codeload.github.com/{git_group}/{git_name}/zip/refs/heads/{version}"
         file_name = f"{git_name}-{version.replace('/','-')}.zip"
-        download_url = f"https://codeload.github.com/{git_group}/{git_name}/zip/{version}"
-
         download_path = os.path.join(repo_path, file_name)
         if not os.path.exists(download_path[:-4]):
             if not os.path.exists(download_path):

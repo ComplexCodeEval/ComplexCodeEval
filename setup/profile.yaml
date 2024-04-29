@@ -1,10 +1,10 @@
 language: Java  # Java or Python
 
-csv_path: ./csv_files  # store the intermediate analysis results of each API
+csv_path: ./csv_files # store the intermediate analysis results of each API
 
 json_path: ./json_files  # store the final dataset of each API
 
-xls_path: ./analysis_repo_dependency  # you can provide the xls or xlsx file of the remote repository in this directory
+xls_path: ./analysis_repo_dependency # you need to provide the xls or xlsx file of the remote repository in this directory
 
 repo_path: ./repositories # store remote code repositories
 
@@ -13,6 +13,12 @@ repo_path: ./repositories # store remote code repositories
 remove_repo: false  # If true, the code repository will be removed after the analysis
 
 remove_csv: false  # If true, the intermediate analysis results of each API will be removed after the analysis
+
+max_repo_count: 24000  # The max number of repositories to be analyzed
+
+per_API_count: 100 # The max number of api to be analyzed for each API(framework/package)
+
+per_api_count: 50 # the max number of data to be analyzed for each api
 
 API:
 # Java
@@ -55,11 +61,7 @@ API:
     accept:
       - com.alibaba.nacos
     reject: []
-  - name: Apache_ServiceComb
-    accept:
-      - org.apache.servicecomb
-    reject: []
-  - name: Java-JWT
+  - name: Java_JWT
     accept:
       - com.auth0.jwt
     reject: []
@@ -87,7 +89,6 @@ API:
   - name: MyBatis
     accept:
       - org.apache.ibatis
-      - org.mybatis
     reject: []
   - name: Hibernate_Validator
     accept:
@@ -96,6 +97,7 @@ API:
   - name: Elasticsearch
     accept:
       - org.elasticsearch
+      - co.elastic.clients.elasticsearch
     reject: []
   - name: Redis
     accept:
@@ -112,10 +114,12 @@ API:
   - name: Druid
     accept:
       - com.alibaba.druid
+      - io.druid
     reject: []
   - name: MongoDB
     accept:
-      - org.mongodb
+      - org.bson
+      - com.mongodb
     reject: []
   - name: Curator_Recipes
     accept:
@@ -127,11 +131,7 @@ API:
     reject: []
   - name: Jasypt_Spring_Boot
     accept:
-      - com.ulisesbocchio.jasyptspringboot
-    reject: []
-  - name: Bgmprovider
-    accept:
-      - org.openeuler.BGMProvider
+      - org.jasypt
     reject: []
   - name: Jakarta_XML_Bind
     accept:
@@ -147,7 +147,7 @@ API:
     reject: []
   - name: HttpCore
     accept:
-      - org.apache.hc
+      - org.apache.http
     reject: []
   - name: Apache_Commons
     accept:
@@ -171,8 +171,7 @@ API:
     reject: []
   - name: Java_XMLBuilder
     accept:
-      - org.jdom
-      - org.jdom2
+      - com.jamesmurty.utils
     reject: []
   - name: FreeMarker
     accept:
@@ -190,15 +189,15 @@ API:
     accept:
       - com.fasterxml.jackson
     reject: []
-  - name: org.json
+  - name: org_json
     accept:
       - org.json
     reject: []
   - name: JSON_Sanitizer
     accept:
-      - com.google.json.JsonSanitizer
+      - com.google.json
     reject: []
-  - name: JSON-Smart
+  - name: JSON_Smart
     accept:
       - net.minidev.json
     reject: []
@@ -225,6 +224,7 @@ API:
   - name: ExpiringMap
     accept:
       - net.jodah.expiringmap
+      - org.apache.mina.util.ExpiringMap
     reject: []
   - name: Kotlin_Stdlib
     accept:
@@ -232,6 +232,8 @@ API:
     reject: []
   - name: Groovy
     accept:
+      - groovy
+      - org.apache.groovy
       - org.codehaus.groovy
     reject: []
   - name: Resilience4j
@@ -244,7 +246,7 @@ API:
     reject: []
   - name: Okio
     accept:
-      - com.squareup.okio
+      - okio
     reject: []
   - name: Zip4j
     accept:
@@ -260,7 +262,7 @@ API:
     reject: []
   - name: Lombok
     accept:
-      - org.lombok
+      - lombok
     reject: []
   - name: Reflections
     accept:
@@ -286,19 +288,23 @@ API:
     accept:
       - org.apache.http
     reject: []
-  - name: Apache-Dubbo
+  - name: Apache_Dubbo
     accept:
       - org.apache.dubbo
+      - io.grpc.reflection.v1alpha
+      - io.grpc.health.v1
+      - com.google.rpc
+      - com.alibaba.dubbo
     reject: []
   - name: OpenFeign
     accept:
-      - org.springframework.cloud.openfeign
+      - feign
     reject: []
   - name: OkHttp
     accept:
       - okhttp3
     reject: []
-  - name: Vert.x
+  - name: Vert_x
     accept:
       - io.vertx
     reject: []
