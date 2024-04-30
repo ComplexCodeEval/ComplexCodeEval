@@ -99,7 +99,10 @@ class pythonFunctionEntity:
         return self.belong_class
 
     def get_comment(self):
-        return self.comment
+        if self.comment[0] == self.comment[1]:
+            return None
+        file_context = self.belong_file.node
+        return '\n'.join(file_context[self.comment[0]:self.comment[1]])
 
     def get_decorator(self):
         return self.decorator

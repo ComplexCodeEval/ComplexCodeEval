@@ -74,9 +74,13 @@ def java_result_gen(match_result, api, count_api, api_json, xls_df, git_name, pr
                             result_entity.set_class_comment(class_entity.get_comment())
                             for import_text in import_texts:
                                 result_entity.set_import_text(import_text)
-                            result_entity.set_prompt(
-                                gen_comment_from_api(result_entity.get_solution(), api, language="java"))
-                            result_entity.set_is_gen_from_api()
+                            result_entity.set_comment(method_entity.get_comment())
+                            try:
+                                result_entity.set_prompt(
+                                    gen_comment_from_api(result_entity.get_solution(), api, language="java"))
+                                result_entity.set_is_gen_from_api()
+                            except:
+                                pass
                             api_json.append(vars(result_entity))
                             flag = True
                             break
@@ -130,9 +134,13 @@ def python_result_gen(match_result, api, count_api, api_json, xls_df, git_name, 
                         result_entity.set_test_function(test_function_entity.get_code())
                     for import_text in file_entity.get_import_text():
                         result_entity.set_import_text(import_text)
-                    result_entity.set_prompt(
-                        gen_comment_from_api(result_entity.get_solution(), api, language="python"))
-                    result_entity.set_is_gen_from_api()
+                    result_entity.set_comment(function_entity.get_comment())
+                    try:
+                        result_entity.set_prompt(
+                            gen_comment_from_api(result_entity.get_solution(), api, language="python"))
+                        result_entity.set_is_gen_from_api()
+                    except:
+                        pass
                     api_json.append(vars(result_entity))
                     flag = True
                     break

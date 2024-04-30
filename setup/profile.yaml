@@ -348,47 +348,7 @@ API:
 #   - name: torch  
 #     accept:  
 #       - torch  
-#     reject: []  
-#   - name: scipy  
-#     accept:  
-#       - scipy  
-#     reject: []  
-#   - name: IPython  
-#     accept:  
-#       - IPython  
-#     reject: []  
-#   - name: Jinja2  
-#     accept:  
-#       - jinja2  
 #     reject: []
-#   - name: networkx  
-#     accept:  
-#       - networkx  
-#     reject: []  
-#   - name: aiohttp  
-#     accept:  
-#       - aiohttp  
-#     reject: []  
-#   - name: attrs  
-#     accept:  
-#       - attrs  
-#     reject: []  
-#   - name: mypy  
-#     accept:  
-#       - mypy  
-#     reject: []  
-#   - name: coverage  
-#     accept:  
-#       - coverage  
-#     reject: []  
-#   - name: boto3  
-#     accept:  
-#       - boto3  
-#     reject: []  
-#   - name: redis  
-#     accept:  
-#       - redis  
-#     reject: []  
 #   - name: tqdm  
 #     accept:  
 #       - tqdm  
@@ -404,23 +364,7 @@ API:
 #   - name: joblib  
 #     accept:  
 #       - joblib  
-#     reject: []  
-#   - name: PyYAML  
-#     accept:  
-#       - pyyaml  
-#     reject: []  
-#   - name: transformers  
-#     accept:  
-#       - transformers  
-#     reject: []  
-#   - name: pyspark  
-#     accept:  
-#       - pyspark  
 #     reject: []
-#   - name: grpcio  
-#     accept:  
-#       - grpcio  
-#     reject: []  
 #   - name: opencv-python  
 #     accept:  
 #       - cv2  
@@ -439,9 +383,9 @@ API:
 #     reject: []  
 #   - name: Cython  
 #     accept:  
-#       - cython  
+#       - Cython  
 #     reject: []  
-#   - name: notebook  
+#   - name: notebook  #工具
 #     accept:  
 #       - notebook  
 #     reject: []  
@@ -473,6 +417,61 @@ API:
 #     accept:  
 #       - fastapi  
 #     reject: []  
+#   - name: boto3  
+#     accept:  
+#       - boto3  
+#     reject: []  
+#   - name: redis  
+#     accept:  
+#       - redis 
+#   - name: scipy  
+#     accept:  
+#       - scipy  
+#     reject: []  
+#   - name: IPython  # 命令行交互工具
+#     accept:  
+#       - IPython  
+#     reject: []  
+#   - name: Jinja2  
+#     accept:  
+#       - jinja2  
+#     reject: []
+#   - name: networkx  
+#     accept:  
+#       - networkx  
+#     reject: []  
+#   - name: aiohttp  
+#     accept:  
+#       - aiohttp  
+#     reject: []  
+#   - name: attrs 
+#     accept:  
+#       - attr  
+#     reject: []  
+#   - name: mypy  # 静态类型检查工具
+#     accept:  
+#       - mypy  
+#     reject: []  
+#   - name: coverage  # 测试覆盖率工具
+#     accept:  
+#       - coverage  
+#     reject: []  
+#   - name: PyYAML
+#     accept:  
+#       - yaml  
+#     reject: []
+#   - name: transformers  
+#     accept:  
+#       - transformers  
+#     reject: []  
+#   - name: pyspark  
+#     accept:  
+#       - pyspark  
+#     reject: []
+#   - name: grpcio
+#     accept:  
+#       - grpc
+#     reject: []  
 #   - name: pydantic  
 #     accept:  
 #       - pydantic  
@@ -481,7 +480,7 @@ API:
 #     accept:  
 #       - marshmallow  
 #     reject: []  
-#   - name: pybind11  
+#   - name: pybind11  #工具
 #     accept:  
 #       - pybind11  
 #     reject: []  

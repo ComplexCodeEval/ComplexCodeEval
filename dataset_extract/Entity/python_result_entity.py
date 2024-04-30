@@ -21,6 +21,7 @@ class pythonResultEnity:
         self.test_function = []
         self.import_text = []
         self.prompt = None
+        self.comment = None
         self.prompt_is_gen_from_api = False
 
     def set_git_group(self, git_group):
@@ -83,6 +84,9 @@ class pythonResultEnity:
     def set_is_gen_from_api(self):
         self.prompt_is_gen_from_api = True
 
+    def set_comment(self, comment):
+        self.comment = comment
+
     def get_git_group(self):
         return self.git_group
 
@@ -142,3 +146,6 @@ class pythonResultEnity:
 
     def get_is_gen_from_api(self):
         return self.prompt_is_gen_from_api
+    
+    def get_comment(self):
+        return self.comment

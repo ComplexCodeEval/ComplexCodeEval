@@ -33,7 +33,7 @@ def test_error(root):
         return False
     except RecursionError:
         return True
-  
+
 
 # 解析java文件中的api调用
 def analyze_java_class(node):
@@ -153,6 +153,10 @@ def parse_java_method(method_entity, class_entity):
     method_entity.set_method_name(method_name)
     method_entity.set_left_context(method_node.start_point[0])
     method_entity.set_right_context(method_node.end_point[0]+1)
+    if method_node.prev_sibling and method_node.prev_sibling.type == "comment":
+        comment_node = method_node.prev_sibling
+        comment = tuple((comment_node.start_point[0], comment_node.end_point[0]+1))
+        method_entity.set_comment(comment)
     method_parameters = method_node.child_by_field_name("parameters")
     if method_parameters:
         for child in method_parameters.children:
@@ -223,7 +227,6 @@ def parse_java_file(path):
             tree = parsers['java'].parse(bytes(code, 'utf8'))
             root = tree.root_node
             if test_error(root):
-                print(f"--->Error: SyntaxError: {path}, skip this file")
                 return
             file_entity = fileEntity(root)
             file_entity.set_file_name(path.split('/')[-1])
@@ -509,7 +512,6 @@ def parse_python_file(path):
             tree = parsers['python'].parse(bytes(code, 'utf-8'))
             root = tree.root_node
             if test_error(root):
-                print(f"--->Error: SyntaxError: {path}, skip this file")
                 return
             file_entity = fileEntity(root)
             file_entity.set_file_name(path.split('/')[-1])

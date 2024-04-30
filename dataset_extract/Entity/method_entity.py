@@ -84,7 +84,10 @@ class methodEntity:
         return self.method_name
 
     def get_comment(self):
-        return self.comment
+        if self.comment is None:
+            return None
+        file_context = self.belong_class.belong_file.node
+        return '\n'.join(file_context[self.comment[0]:self.comment[1]])
 
     def get_annotation(self):
         return self.annotation
