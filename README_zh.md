@@ -28,6 +28,7 @@
 - `import_text`: 导入包的列表。
 - `prompt`: 可直接用于执行代码生成的提示消息。请注意，如果原始源代码没有代码注释，我们将使用 DeepSeekCoder 生成注释。我们用于生成代码注释的提示是：“总结以下使用 [框架] 的代码，并生成 [编程语言] 注释。响应应由两部分组成:描述以及块标签。块标签应包括 @param 和 @return。”
 - `prompt_is_gen_from_api`: true = 提示消息由 DeepSeekCoder API 生成；false = 提示消息是代码存储库中的原始代码注释。
+- `method_dependencies`: `solution`对应的代码中所调用的函数
 
 ### Python 数据集字段
 
@@ -51,6 +52,7 @@
 - `import_text`: 导入文本的列表。
 - `prompt`: 可直接用于执行代码生成的提示消息。请注意，如果原始源代码没有代码注释，我们将使用 DeepSeekCoder 生成注释。我们用于生成代码注释的提示是：“总结以下使用 [框架] 的代码，并生成 [编程语言] 注释。响应应由两部分组成：描述以及块标签。块标签应包括 @param 和 @return。”
 - `prompt_is_gen_from_api`: true = 提示消息由 DeepSeekCoder API 生成；false = 提示消息是代码存储库中的原始代码注释。
+- `function_dependencies`: `solution`对应的代码中所调用的函数
 
 
 ### 功能特点

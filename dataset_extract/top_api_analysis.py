@@ -80,7 +80,19 @@ def java_result_gen(match_result, api, count_api, api_json, xls_df, git_name, pr
                                     gen_comment_from_api(result_entity.get_solution(), api, language="java"))
                                 result_entity.set_is_gen_from_api()
                             except:
+                                print("--->Error: gen comment from api failed")
                                 pass
+                            for call_method in method_entity.get_call_method():
+                                call_method_name = call_method.get_call_method_name()
+                                call_api = call_method_name
+                                for import_text in import_texts:
+                                    import_text = import_text.split(".")
+                                    if call_method_name.startswith(import_text[-1]):
+                                        import_text = import_text[:-1]
+                                        import_text.extend(call_method_name.split("."))
+                                        call_api = ".".join(import_text)
+                                        break
+                                result_entity.set_method_dependencies(call_api)
                             api_json.append(vars(result_entity))
                             flag = True
                             break
@@ -140,7 +152,10 @@ def python_result_gen(match_result, api, count_api, api_json, xls_df, git_name, 
                             gen_comment_from_api(result_entity.get_solution(), api, language="python"))
                         result_entity.set_is_gen_from_api()
                     except:
+                        print("--->Error: gen comment from api failed")
                         pass
+                    for call_method in function_entity.get_call_method():
+                        result_entity.set_function_dependencies(call_method.get_call_api())
                     api_json.append(vars(result_entity))
                     flag = True
                     break

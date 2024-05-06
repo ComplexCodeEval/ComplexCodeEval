@@ -28,6 +28,7 @@ The aim of this project is to crawl high-star GitHub projects, parse their depen
 - `import_text`: List of import packages.
 - `prompt`: Prompt message that can be used directly to perform code generation. Note that if the original source code does not have code annotation/comments, we utilize DeepSeekCoder to generate the annotation. The prompt that we use to generate the code comments is “Summarize the following code that uses [framework] and generate the [programming language] comments. The response should be made up of two parts – a description followed by block tags. The block tags should include @param and @return.”
 - `prompt_is_gen_from_api`: true = the prompt message is generated from DeepSeekCoder API; false = the prompt message is the original code annotation/comment from the code repository.
+- `method_dependencies`: The functions called in the code corresponding to `solution`.
 
 ### Fields for Python Dataset
 
@@ -51,6 +52,7 @@ The aim of this project is to crawl high-star GitHub projects, parse their depen
 - `import_text`: List of import texts.
 - `prompt`: Prompt message that can be used directly to perform code generation. Note that if the original source code does not have code annotation/comments, we utilize DeepSeekCoder to generate the annotation. The prompt that we use to generate the code comments is “Summarize the following code that uses [framework] and generate the [programming language] comments. The response should be made up of two parts – a description followed by block tags. The block tags should include @param and @return.”
 - `prompt_is_gen_from_api`: true = the prompt message is generated from DeepSeekCoder API; false = the prompt message is the original code annotation/comment from the code repository.
+- `function_dependencies`: Functions called in the code corresponding to `solution`.
 
 ### Key Features
 

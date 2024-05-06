@@ -23,6 +23,7 @@ class pythonResultEnity:
         self.prompt = None
         self.comment = None
         self.prompt_is_gen_from_api = False
+        self.function_dependencies = []
 
     def set_git_group(self, git_group):
         self.git_group = git_group
@@ -87,6 +88,10 @@ class pythonResultEnity:
     def set_comment(self, comment):
         self.comment = comment
 
+    def set_function_dependencies(self, function_dependencies):
+        if function_dependencies not in self.function_dependencies:
+            self.function_dependencies.append(function_dependencies)
+
     def get_git_group(self):
         return self.git_group
 
@@ -149,3 +154,6 @@ class pythonResultEnity:
     
     def get_comment(self):
         return self.comment
+
+    def get_function_dependencies(self):
+        return self.function_dependencies

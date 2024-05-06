@@ -25,6 +25,7 @@ class resultEntity:
         self.prompt = None
         self.comment = None
         self.prompt_is_gen_from_api = False
+        self.method_dependencies = []
 
     def set_git_group(self, git_group):
         self.git_group = git_group
@@ -97,6 +98,10 @@ class resultEntity:
     def set_comment(self, comment):
         self.comment = comment
 
+    def set_method_dependencies(self, method_dependencies):
+        if method_dependencies not in self.method_dependencies:
+            self.method_dependencies.append(method_dependencies)
+
     def get_git_group(self):
         return self.git_group
 
@@ -165,3 +170,6 @@ class resultEntity:
     
     def get_comment(self):
         return self.comment
+    
+    def get_method_dependencies(self):
+        return self.method_dependencies
