@@ -436,7 +436,17 @@ def parse_python_function(node, function_entity):
         return False
     function_parameters = node.child_by_field_name("parameters")
     function_entity.set_function_name(function_name)
-    function_signature = function_name + function_parameters.text.decode("utf-8")
+    # function_signature = function_name + function_parameters.text.decode("utf-8")
+    # function_entity.set_function_signature(function_signature)
+    function_signature = ""
+    for child in node.children:
+        if child.type != "block":
+            if "comment" in child.type:
+                continue
+            elif "parameter" not in child.type and function_signature:
+                function_signature += " " + child.text.decode("utf-8")
+            else:
+                function_signature += child.text.decode("utf-8")
     function_entity.set_function_signature(function_signature)
     if function_name.lower().startswith("test") or function_name.lower().endswith("test"):
         function_entity.set_is_test_function()
