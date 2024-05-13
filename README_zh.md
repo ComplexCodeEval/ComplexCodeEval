@@ -6,54 +6,61 @@
 
 ### Java 数据集字段
 
-- `git_group`: 存放项目的 Git 组织或组织。
-- `git_name`: Git 上项目的名称。
-- `version`: 项目的版本号。
-- `language`: 项目使用的编程语言。
-- `project_name`: 项目的名称。
-- `create_time`: 项目创建时间。
-- `update_time`: 项目最后更新时间。
-- `file_path`: 源代码仓库中相关焦点类的文件路径。
-- `focal_module`: 项目的焦点模块。
-- `focal_package`: 项目的焦点包。
-- `focal_class`: 项目的焦点类。
-- `focal_name`: 项目的焦点方法名称。
-- `focal_parameter`: 项目的焦点方法参数列表。
-- `solution`: 相关问题的解决方案。注意，这直接来自原始源文件。根据下游任务的类型（代码补全或代码生成）和需要向模型提供的上下文量，用户可以采用和更新提示字段。
-- `method_signature`: 目标焦点方法的方法签名。
-- `left_context`: 焦点方法之前的源代码。
-- `right_context`: 焦点方法之后的源代码（括号结束后）。
-- `test_function`: 从原始源代码中提取的测试函数列表，对应于测试焦点方法。
-- `class_comment`: 焦点类的类注释。
-- `import_text`: 导入包的列表。
-- `prompt`: 可直接用于执行代码生成的提示消息。请注意，如果原始源代码没有代码注释，我们将使用 DeepSeekCoder 生成注释。我们用于生成代码注释的提示是：“总结以下使用 [框架] 的代码，并生成 [编程语言] 注释。响应应由两部分组成:描述以及块标签。块标签应包括 @param 和 @return。”
-- `prompt_is_gen_from_api`: true = 提示消息由 DeepSeekCoder API 生成；false = 提示消息是代码存储库中的原始代码注释。
-- `method_dependencies`: `solution`对应的代码中所调用的函数
+- `git_group`: 存放项目的 Git 组织或组织。类型为`String`，eg:`ukwa`
+- `git_name`: Git 上项目的名称。类型为`String`, eg:`webarchive-discovery`
+- `version`: 项目的版本号。类型为`String`, eg:`warc-discovery-3.1.0`
+- `language`: 项目使用的编程语言。类型为`String`, eg: `Java`
+- `project_name`: 从指定下载路径下载下来的项目名称。类型为`String`, eg:`webarchive-discovery-warc-discovery-3.1.0.zip`
+- `file_path`: 源代码仓库中相关焦点类的文件路径。类型为`String`, eg:`/webarchive-discovery-warc-discovery-3.1.0/webarchive-discovery-warc-discovery-3.1.0/warc-indexer/src/main/java/uk/bl/wa/parsers/HtmlFeatureParser.java`
+- `focal_module`: 项目的焦点模块。类型为`String`, eg:`warc-indexer`
+- `focal_package`: 项目的焦点包。类型为`String`, eg:`uk/bl/wa/parsers`
+- `focal_class`: 项目的焦点类。类型为`String`, eg:`HtmlFeatureParser`
+- `focal_name`: 项目的焦点方法名称。类型为`String`, eg:`parse`
+- `focal_parameter`: 项目的焦点方法参数列表。类型为`List` 
+- `solution`: 相关问题的解决方案。注意，这直接来自原始源文件。根据下游任务的类型（代码补全或代码生成）和需要向模型提供的上下文量，用户可以采用和更新提示字段。类型为`String`
+- `method_signature`: 目标焦点方法的方法签名。类型为`String`, eg:`@Override\n    public void parse(InputStream stream, ContentHandler handler,\n            Metadata metadata, ParseContext context) throws IOException,\n            SAXException, TikaException`
+- `left_context`: 焦点方法之前的源代码。类型为`String`
+- `right_context`: 焦点方法之后的源代码（括号结束后）。类型为`String`
+- `test_function`: 从原始源代码中提取的测试函数列表，对应于测试焦点方法。类型为`List`
+- `class_comment`: 焦点类的类注释，可能为`null`。类型为`String`
+- `import_text`: 导入包的列表。类型为`List`
+- `prompt`: 可直接用于执行代码生成的提示消息。请注意，该prompt是使用 DeepSeekCoder-33b 生成的注释。我们用于生成代码注释的提示是：“总结以下使用 [框架] 的代码，并生成 [编程语言] 注释。响应应由两部分组成:描述以及块标签。块标签应包括 @param 和 @return。”类型为`String`
+- `comment`: 从原文件中提取的焦点方法的文档注释，可能为`null`。类型为`String`
+- `prompt_is_gen_from_api`: true = 提示消息由 DeepSeekCoder API 生成；false = 提示消息是代码存储库中的原始代码注释。类型为`Bool`
+- `method_dependencies`: `solution`对应的代码中所调用的函数。类型为`List`
+- `project_create_time`: 项目创建时间。类型为`Datetime`, eg:`2012-12-20T12:17:14+00:00`
+- `project_update_time`: 项目更新时间。类型为`Datetime`, eg:`2024-03-31T14:13:17+00:00`
+- `file_create_time`: 文件创建时间。类型为`Datetime`, eg:`2013-03-27T13:42:06Z`
+- `file_update_time`: 文件创建时间。类型为`Datetime`, eg:`2020-05-14T13:06:47Z`
+- `method_update_time`: 方法的最近一次的修改行或增加行操作的时间。类型为`Datetime`, eg:`2013-03-27T13:42:06Z`
 
 ### Python 数据集字段
 
-- `git_group`: 存放项目的 Git 组织或组织。
-- `git_name`: Git 上项目的名称。
-- `version`: 项目的版本号。
-- `language`: 项目使用的编程语言。
-- `project_name`: 项目的名称。
-- `create_time`: 项目创建时间。
-- `update_time`: 项目最后更新时间。
-- `file_path`: 源代码仓库中相关焦点类的文件路径。
-- `file_name`: 文件名称。
-- `focal_class`: 项目的焦点类。
-- `focal_name`: 项目的焦点函数名称。
-- `focal_parameter`: 项目的焦点函数参数列表。
-- `solution`: 相关问题的解决方案。注意，这直接来自原始源文件。根据下游任务的类型（代码补全或代码生成）和需要向模型提供的上下文量，用户可以采用和更新提示字段。
-- `function_signature`: 目标焦点函数的函数签名。
-- `left_context`: 焦点函数之前的源代码。
-- `right_context`: 焦点函数之后的源代码（括号结束后）。
-- `test_function`: 从原始源代码中提取的测试函数列表，对应于测试焦点方法。
-- `import_text`: 导入文本的列表。
-- `prompt`: 可直接用于执行代码生成的提示消息。请注意，如果原始源代码没有代码注释，我们将使用 DeepSeekCoder 生成注释。我们用于生成代码注释的提示是：“总结以下使用 [框架] 的代码，并生成 [编程语言] 注释。响应应由两部分组成：描述以及块标签。块标签应包括 @param 和 @return。”
-- `prompt_is_gen_from_api`: true = 提示消息由 DeepSeekCoder API 生成；false = 提示消息是代码存储库中的原始代码注释。
-- `function_dependencies`: `solution`对应的代码中所调用的函数
-
+- `git_group`: 存放项目的 Git 组织或组织。类型为`String`，eg: `intel`
+- `git_name`: Git 上项目的名称。类型为`String`，eg: `neural-compressor`
+- `version`: 项目的版本号。类型为`String`，eg: `v2.6.dev0`
+- `language`: 项目使用的编程语言。类型为`String`，eg: `Python`
+- `project_name`: 从指定下载路径下载下来的项目名称。类型为`String`，eg: `neural-compressor-v2.6.dev0.zip`
+- `file_path`: 源代码仓库中相关焦点函数所在文件的文件路径。类型为`String`，eg: `/neural-compressor-v2.6.dev0/neural-compressor-2.6.dev0/neural_compressor/utils/pytorch.py`
+- `file_name`: 文件名称。类型为`String`，eg: `pytorch.py`
+- `focal_class`: 项目的焦点类，可能为`null`。类型为`String`，eg: `YamlOutputParser`
+- `focal_name`: 项目的焦点函数名称。类型为`String`，eg: `load`
+- `focal_parameter`: 项目的焦点函数参数列表。类型为`List`
+- `solution`: 相关问题的解决方案。注意，这直接来自原始源文件。根据下游任务的类型（代码补全或代码生成）和需要向模型提供的上下文量，用户可以采用和更新提示字段。类型为`String`
+- `function_signature`: 目标焦点函数的函数签名。类型为`String`，eg: `def load(checkpoint_dir=None, model=None, layer_wise=False, history_cfg=None, **kwargs) :`
+- `left_context`: 焦点函数之前的源代码。类型为`String`
+- `right_context`: 焦点函数之后的源代码。类型为`String`
+- `test_function`: 从原始源代码中提取的测试函数列表，对应于测试焦点方法。类型为`List`
+- `import_text`: 导入包的列表。类型为`List`
+- `prompt`: 可直接用于执行代码生成的提示消息。请注意，该prompt是使用 DeepSeekCoder-33b 生成的注释。我们用于生成代码注释的提示是：“总结以下使用 [框架] 的代码，并生成 [编程语言] 注释。响应应由两部分组成:描述以及块标签。块标签应包括 @param 和 @return。”类型为`String`
+- `comment`: 从原文件中提取的焦点函数的文档注释，可能为`null`。类型为`String`
+- `prompt_is_gen_from_api`: true = 提示消息由 DeepSeekCoder API 生成；false = 提示消息是代码存储库中的原始代码注释。类型为`Bool`
+- `function_dependencies`: `solution`对应的代码中所调用的函数。类型为`List`
+- `project_create_time`: 项目创建时间。类型为`Datetime`，eg: `2020-07-21T23:49:56+00:00`
+- `project_update_time`: 项目更新时间。类型为`Datetime`，eg: `2024-04-18T02:58:11+00:00`
+- `file_create_time`: 文件创建时间。类型为`Datetime`，eg: `2021-09-24T08:43:20Z`
+- `file_update_time`: 文件更新时间。类型为`Datetime`，eg: `2024-03-22T07:27:34Z`
+- `function_update_time`: 函数的最近一次的修改行或增加行操作的时间。类型为`Datetime`，eg: `2023-09-25T10:14:14Z`
 
 ### 功能特点
 
@@ -69,23 +76,7 @@
 ```sh
 python3 -m dataset_extract
 ```
-
-### 输出示例
-
-一个默认的输出示例：
-- 会在当前目录下生成三个文件夹`./csv_files`、`./json_files`、`./repositories`。
-- `./repositories`存放了远程仓库信息表中的所有项目，类似于下图：  
-![/repositories示例](example/image0.png)
-- `./csv_files`存放了在远程仓库信息表中的所有项目的api调用情况，其中会为[setup/profile.yaml](setup/profile.yaml)中提供的所有需要提取的API分别创建一个`{language}_{API}_repo_acount.csv`和`{language}_{API}_repo_acount_analysis.csv`类似于下图：  
-![/csv_files示例](example/image1.png)
-  - `{language}_{API}_repo_acount.csv`的示例图如下：  
-  ![repo_acount示例](example/image2.png)
-  - `{language}_{API}_repo_acount_analysis.csv`的示例图如下：  
-  ![repo_acount_analysis示例](example/image3.png)
-- `./json_files`存放了最终数据集，其中会为[setup/profile.yaml](setup/profile.yaml)中提供的所有需要提取的API分别创建一个`{language}_{api}_comment_tested_API_1.json`，类似于下图：  
-![/json_files示例](example/image4.png)
-  - `{language}_{api}_comment_tested_API_1.json`的示例图如下：  
-  ![comment_tested_API示例](example/image5.png)
+最终会在`./analysis_repo_dependency`中生成远程信息依赖表，在`./repositories`中存放下载的远程仓库，在`./csv_files`中生成以每个框架（包）为单位的对应api的调用情况，`./json_files`中生成以每个框架（包）为单位的最终数据集
 
 ### 配置文件
 可自行更改配置文件[setup/profile.yaml](setup/profile.yaml)。

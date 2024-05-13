@@ -4,55 +4,63 @@
 
 The aim of this project is to crawl high-star GitHub projects, parse their dependency information, determine whether they depend on the APIs specified in `/setup/profile.yaml`, build a remote project dependency table, then retrieve project-related information from the dependency table, parse the projects, and generate the final dataset. Users can also provide project dependency tables (XLS or XLSX files). The tables provided by users should include the following fields: `git_group`, `git_name`, `language`, `version`, `download_url`, `file_name`, `update_time`, and `create_time`. An example of the remote repository information table can be found at [analysis_repo_dependency/analysis_repo_dependency1.xls](analysis_repo_dependency/analysis_repo_dependency1.xls).
 
-### Fields for Java Dataset
+### Java Dataset Fields
 
-- `git_group`: Git group or organization where the project is located.
-- `git_name`: Name of the project in Git.
-- `version`: Version number of the project.
-- `language`: Programming language used in the project.
-- `project_name`: Name of the project.
-- `create_time`: Time when the project was created.
-- `update_time`: Time when the project was last updated.
-- `file_path`: File path of the relevant focal class in its original repository.
-- `focal_module`: Focal module of the project.
-- `focal_package`: Focal package of the project.
-- `focal_class`: Focal class of the project.
-- `focal_name`: Focal method name of the project.
-- `focal_parameter`: Focal parameter list.
-- `solution`: Solution of the related problem. Note that this is taken directly from the original source file. Depending on the type of downstream tasks (code completion or code generation) and the amount of context that needs to be provided to the model, users can adopt and update the prompt field accordingly.
-- `method_signature`: Method signature of the target focal method.
-- `left_context`: Source code before the focal method.
-- `right_context`: Source code after the focal method (after the ending parenthesis).
-- `test_function`: List of test functions extracted from the original source code, correspond to testing the focal method.
-- `class_comment`: Class comment of the focal class.
-- `import_text`: List of import packages.
-- `prompt`: Prompt message that can be used directly to perform code generation. Note that if the original source code does not have code annotation/comments, we utilize DeepSeekCoder to generate the annotation. The prompt that we use to generate the code comments is “Summarize the following code that uses [framework] and generate the [programming language] comments. The response should be made up of two parts – a description followed by block tags. The block tags should include @param and @return.”
-- `prompt_is_gen_from_api`: true = the prompt message is generated from DeepSeekCoder API; false = the prompt message is the original code annotation/comment from the code repository.
-- `method_dependencies`: The functions called in the code corresponding to `solution`.
+- `git_group`: The Git organization or group where the project is hosted. Type is `String`, e.g., `ukwa`.
+- `git_name`: The name of the project on Git. Type is `String`, e.g., `webarchive-discovery`.
+- `version`: The version number of the project. Type is `String`, e.g., `warc-discovery-3.1.0`.
+- `language`: The programming language used in the project. Type is `String`, e.g., `Java`.
+- `project_name`: The name of the project as downloaded from the specified download path. Type is `String`, e.g., `webarchive-discovery-warc-discovery-3.1.0.zip`.
+- `file_path`: The file path of the relevant focal class in the source code repository. Type is `String`, e.g., `/webarchive-discovery-warc-discovery-3.1.0/webarchive-discovery-warc-discovery-3.1.0/warc-indexer/src/main/java/uk/bl/wa/parsers/HtmlFeatureParser.java`.
+- `focal_module`: The focal module of the project. Type is `String`, e.g., `warc-indexer`.
+- `focal_package`: The focal package of the project. Type is `String`, e.g., `uk/bl/wa/parsers`.
+- `focal_class`: The focal class of the project. Type is `String`, e.g., `HtmlFeatureParser`.
+- `focal_name`: The name of the focal method in the project. Type is `String`, e.g., `parse`.
+- `focal_parameter`: The list of parameters for the focal method. Type is `List`.
+- `solution`: The solution to the relevant problem. Note that this is directly from the original source file. Depending on the type of downstream task (code completion or code generation) and the amount of context needed to be provided to the model, the user can adopt and update the prompt field. Type is `String`.
+- `method_signature`: The method signature of the target focal method. Type is `String`, e.g., `@Override\n    public void parse(InputStream stream, ContentHandler handler,\n            Metadata metadata, ParseContext context) throws IOException,\n            SAXException, TikaException`.
+- `left_context`: The source code before the focal method. Type is `String`.
+- `right_context`: The source code after the focal method (after the closing bracket). Type is `String`.
+- `test_function`: A list of test functions extracted from the original source code, corresponding to the test focal method. Type is `List`.
+- `class_comment`: The class comment for the focal class, which may be `null`. Type is `String`.
+- `import_text`: A list of imported packages. Type is `List`.
+- `prompt`: A prompt message that can be used directly for code generation. Please note that this prompt is generated using the comments from DeepSeekCoder-33b. The prompt we use for generating code comments is: "Summarize the following code using [framework] and generate [programming language] comments. The response should be composed of two parts: description and block tags. Block tags should include @param and @return." Type is `String`.
+- `comment`: The documentation comment for the focal method extracted from the original file, which may be `null`. Type is `String`.
+- `prompt_is_gen_from_api`: `true` = The prompt message is generated by the DeepSeekCoder API; `false` = The prompt message is the original code comment from the code repository. Type is `Bool`.
+- `method_dependencies`: The functions called in the code corresponding to `solution`. Type is `List`.
+- `project_create_time`: The creation time of the project. Type is `Datetime`, e.g., `2012-12-20T12:17:14+00:00`.
+- `project_update_time`: The update time of the project. Type is `Datetime`, e.g., `2024-03-31T14:13:17+00:00`.
+- `file_create_time`: The creation time of the file. Type is `Datetime`, e.g., `2013-03-27T13:42:06Z`.
+- `file_update_time`: The update time of the file. Type is `Datetime`, e.g., `2020-05-14T13:06:47Z`.
+- `method_update_time`: The most recent time of modification or addition to the lines of the method. Type is `Datetime`, e.g., `2013-03-27T13:42:06Z`.
 
-### Fields for Python Dataset
+### Python Dataset Fields
 
-- `git_group`: Git group or organization where the project is located.
-- `git_name`: Name of the project in Git.
-- `version`: Version number of the project.
-- `language`: Programming language used in the project.
-- `project_name`: Name of the project.
-- `create_time`: Time when the project was created.
-- `update_time`: Time when the project was last updated.
-- `file_path`: File path of the relevant focal class in its original repository.
-- `file_name`: File name.
-- `focal_class`: Focal class of the project.
-- `focal_name`: Focal function name of the project.
-- `focal_parameter`: Focal parameter list.
-- `solution`: Solution of the related problem. Note that this is taken directly from the original source file. Depending on the type of downstream tasks (code completion or code generation) and the amount of context that needs to be provided to the model, users can adopt and update the prompt field accordingly.
-- `function_signature`: Function signature of the target focal function.
-- `left_context`: Source code before the focal function.
-- `right_context`: Source code after the focal function.
-- `test_function`: List of test functions extracted from the original source code, correspond to testing the focal method.
-- `import_text`: List of import texts.
-- `prompt`: Prompt message that can be used directly to perform code generation. Note that if the original source code does not have code annotation/comments, we utilize DeepSeekCoder to generate the annotation. The prompt that we use to generate the code comments is “Summarize the following code that uses [framework] and generate the [programming language] comments. The response should be made up of two parts – a description followed by block tags. The block tags should include @param and @return.”
-- `prompt_is_gen_from_api`: true = the prompt message is generated from DeepSeekCoder API; false = the prompt message is the original code annotation/comment from the code repository.
-- `function_dependencies`: Functions called in the code corresponding to `solution`.
+- `git_group`: The Git organization or group where the project is hosted. Type is `String`, e.g., `intel`.
+- `git_name`: The name of the project on Git. Type is `String`, e.g., `neural-compressor`.
+- `version`: The version number of the project. Type is `String`, e.g., `v2.6.dev0`.
+- `language`: The programming language used in the project. Type is `String`, e.g., `Python`.
+- `project_name`: The name of the project as downloaded from the specified download path. Type is `String`, e.g., `neural-compressor-v2.6.dev0.zip`.
+- `file_path`: The file path of the relevant focal function in the source code repository. Type is `String`, e.g., `/neural-compressor-v2.6.dev0/neural-compressor-2.6.dev0/neural_compressor/utils/pytorch.py`.
+- `file_name`: The name of the file. Type is `String`, e.g., `pytorch.py`.
+- `focal_class`: The focal class of the project, which may be `null`. Type is `String`, e.g., `YamlOutputParser`.
+- `focal_name`: The name of the focal function in the project. Type is `String`, e.g., `load`.
+- `focal_parameter`: The list of parameters for the focal function. Type is `List`.
+- `solution`: The solution to the relevant problem. Note that this is directly from the original source file. Depending on the type of downstream task (code completion or code generation) and the amount of context needed to be provided to the model, the user can adopt and update the prompt field. Type is `String`.
+- `function_signature`: The function signature of the target focal function. Type is `String`, e.g., `def load(checkpoint_dir=None, model=None, layer_wise=False, history_cfg=None, **kwargs) :`.
+- `left_context`: The source code before the focal function. Type is `String`.
+- `right_context`: The source code after the focal function. Type is `String`.
+- `test_function`: A list of test functions extracted from the original source code, corresponding to the test focal method. Type is `List`.
+- `import_text`: A list of imported packages. Type is `List`.
+- `prompt`: A prompt message that can be used directly for code generation. Please note that this prompt is generated using the comments from DeepSeekCoder-33b. The prompt we use for generating code comments is: "Summarize the following code using [framework] and generate [programming language] comments. The response should be composed of two parts: description and block tags. Block tags should include @param and @return." Type is `String`.
+- `comment`: The documentation comment for the focal function extracted from the original file, which may be `null`. Type is `String`.
+- `prompt_is_gen_from_api`: `true` = The prompt message is generated by the DeepSeekCoder API; `false` = The prompt message is the original code comment from the code repository. Type is `Bool`.
+- `function_dependencies`: The functions called in the code corresponding to `solution`. Type is `List`.
+- `project_create_time`: The creation time of the project. Type is `Datetime`, e.g., `2020-07-21T23:49:56+00:00`.
+- `project_update_time`: The update time of the project. Type is `Datetime`, e.g., `2024-04-18T0`.
+- `file_create_time`: The creation time of the file. Type is `Datetime`, e.g., `2013-03-27T13:42:06Z`.
+- `file_update_time`: The update time of the file. Type is `Datetime`, e.g., `2020-05-14T13:06:47Z`.
+- `method_update_time`: The most recent time of modification or addition to the lines of the method. Type is `Datetime`, e.g., `2013-03-27T13:42:06Z`.
 
 ### Key Features
 
@@ -68,23 +76,7 @@ Run the tool:
 ```sh
 python3 -m dataset_extract
 ```
-
-### Output Example
-
-A default output example:
-- Three folders `./csv_files`, `./json_files`, and `./repositories` will be generated in the current directory.
-- The `./repositories` folder stores all projects from the remote repository information table, similar to the following image:  
-![Example of /repositories](example/image0.png)
-- The `./csv_files` folder stores the API call information for all projects in the remote repository information table. For each API specified in [setup/profile.yaml](setup/profile.yaml), `{language}_{API}_repo_acount.csv` and `{language}_{API}_repo_acount_analysis.csv` will be created, similar to the following images:  
-![Example of /csv_files](example/image1.png)
-  - Example of `{language}_{API}_repo_acount.csv`:  
-  ![Example of repo_acount](example/image2.png)
-  - Example of `{language}_{API}_repo_acount_analysis.csv`:  
-  ![Example of repo_acount_analysis](example/image3.png)
-- The `./json_files` folder stores the final datasets. For each API specified in [setup/profile.yaml](setup/profile.yaml), `{language}_{api}_comment_tested_API_1.json` will be created, similar to the following image:  
-![Example of /json_files](example/image4.png)
-  - Example of `{language}_{api}_comment_tested_API_1.json`:  
-  ![Example of comment_tested_API](example/image5.png)
+The final output will include a remote information dependency table generated in the `./analysis_repo_dependency` directory, the downloaded remote repositories stored in the `./repositories` directory, the API call details for each framework (package) generated in the `./csv_files` directory, and the final dataset for each framework (package) generated in the `./json_files` directory.
 
 ### Configuration File
 
