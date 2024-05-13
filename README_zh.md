@@ -74,7 +74,9 @@
 
 运行工具
 ```sh
-python3 -m dataset_extract
+git clone https://github.com/jiafeng0527/dataset_extract.git  
+cd ./dataset_extract  
+python3 -m dataset_extract  
 ```
 最终会在`./analysis_repo_dependency`中生成远程信息依赖表，在`./repositories`中存放下载的远程仓库，在`./csv_files`中生成以每个框架（包）为单位的对应api的调用情况，`./json_files`中生成以每个框架（包）为单位的最终数据集
 
