@@ -8,7 +8,7 @@ from time import time
 from dataset_extract.repo_api_count_analysis import repo_api_count_analysis
 from dataset_extract.top_api_analysis import top_api_analysis
 from dataset_extract.grab_repositories import grab_repositories, resolve_dependencies
-from dataset_extract.add_file_time import add_file_time
+from dataset_extract.add_fields import add_file_time, add_license 
 
 def read_profile():
     try :
@@ -58,6 +58,7 @@ def main():
         repo_api_count_analysis(properties)
         top_api_analysis(properties)
         add_file_time(properties)
+        add_license(properties)
         if properties["remove_repo"]:
             print("Removing repo")
             import shutil

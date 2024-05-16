@@ -33,6 +33,13 @@
 - `file_create_time`: 文件创建时间。类型为`Datetime`, eg:`2013-03-27T13:42:06Z`
 - `file_update_time`: 文件创建时间。类型为`Datetime`, eg:`2020-05-14T13:06:47Z`
 - `method_update_time`: 方法的最近一次的修改行或增加行操作的时间。类型为`Datetime`, eg:`2013-03-27T13:42:06Z`
+- `license`: 该数据所属项目的许可证，可能为`null`。类型为`dict`, eg:`{
+        "key": "agpl-3.0",
+        "name": "GNU Affero General Public License v3.0",
+        "spdx_id": "AGPL-3.0",
+        "url": "https://api.github.com/licenses/agpl-3.0",
+        "node_id": "MDc6TGljZW5zZTE="
+      }`
 
 ### Python 数据集字段
 
@@ -61,6 +68,13 @@
 - `file_create_time`: 文件创建时间。类型为`Datetime`，eg: `2021-09-24T08:43:20Z`
 - `file_update_time`: 文件更新时间。类型为`Datetime`，eg: `2024-03-22T07:27:34Z`
 - `function_update_time`: 函数的最近一次的修改行或增加行操作的时间。类型为`Datetime`，eg: `2023-09-25T10:14:14Z`
+- `license`: 该数据所属项目的许可证，可能为`null`。类型为`dict`, eg:`{
+        "key": "agpl-3.0",
+        "name": "GNU Affero General Public License v3.0",
+        "spdx_id": "AGPL-3.0",
+        "url": "https://api.github.com/licenses/agpl-3.0",
+        "node_id": "MDc6TGljZW5zZTE="
+      }`
 
 ### 功能特点
 

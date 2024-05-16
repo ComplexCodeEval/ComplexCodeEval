@@ -33,6 +33,13 @@ The aim of this project is to crawl high-star GitHub projects, parse their depen
 - `file_create_time`: The creation time of the file. Type is `Datetime`, e.g., `2013-03-27T13:42:06Z`.
 - `file_update_time`: The update time of the file. Type is `Datetime`, e.g., `2020-05-14T13:06:47Z`.
 - `method_update_time`: The most recent time of modification or addition to the lines of the method. Type is `Datetime`, e.g., `2013-03-27T13:42:06Z`.
+- `license`:  The license of the project to which this data belongs, which may be null. The type is dict, e.g., `{
+        "key": "agpl-3.0",
+        "name": "GNU Affero General Public License v3.0",
+        "spdx_id": "AGPL-3.0",
+        "url": "https://api.github.com/licenses/agpl-3.0",
+        "node_id": "MDc6TGljZW5zZTE="
+      }`
 
 ### Python Dataset Fields
 
@@ -61,6 +68,13 @@ The aim of this project is to crawl high-star GitHub projects, parse their depen
 - `file_create_time`: The creation time of the file. Type is `Datetime`, e.g., `2013-03-27T13:42:06Z`.
 - `file_update_time`: The update time of the file. Type is `Datetime`, e.g., `2020-05-14T13:06:47Z`.
 - `method_update_time`: The most recent time of modification or addition to the lines of the method. Type is `Datetime`, e.g., `2013-03-27T13:42:06Z`.
+- `license`:  The license of the project to which this data belongs, which may be null. The type is dict, e.g., `{
+        "key": "agpl-3.0",
+        "name": "GNU Affero General Public License v3.0",
+        "spdx_id": "AGPL-3.0",
+        "url": "https://api.github.com/licenses/agpl-3.0",
+        "node_id": "MDc6TGljZW5zZTE="
+      }`
 
 ### Key Features
 

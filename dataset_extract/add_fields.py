@@ -116,7 +116,40 @@ def add_file_time(properties):
                         else:
                             value["method_update_time"] = function_upadte_time
                     except Exception as e:
-                        print(f"--->IMPError: Failed to process data: {e}")
+                        print(f"--->Error: Failed to process data: {e}")
                         continue
         with open(json_file, 'w') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
+             
+
+def add_license(properties):
+    json_file_path = os.path.abspath(properties["json_path"])
+    json_files = []
+    for file in os.listdir(json_file_path):
+        if file.endswith(".json"):
+            file_path = json_file_path + "/" + file
+            json_files.append(file_path)
+    for json_file in json_files:
+        with open(json_file, 'r') as f:
+            print("===>Processing file: ", json_file)
+            data = json.load(f)
+            for key in data.keys():
+                print("===>Processing API: ", key)     
+                for value in data[key]:
+                    try:
+                        if "license" in value.keys():
+                            continue
+                        print("===>Processing data: git_group: ", value["git_group"], "git_name: ", value["git_name"], "version ", value["version"])
+                        git_group = value["git_group"]
+                        git_name = value["git_name"]
+                        api_url = f'https://api.github.com/repos/{git_group}/{git_name}/license'
+                        license = make_request(api_url)
+                        if license:
+                            value["license"] = license["license"]
+                        else:
+                            value["license"] = None
+                    except Exception as e:
+                        print(f"--->Error: Failed to process data: {e}")
+                        continue
+        with open(json_file, 'w') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)   
