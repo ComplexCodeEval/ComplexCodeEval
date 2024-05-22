@@ -18,7 +18,10 @@ class fileEntity:
             class_entity.clear_node()
         for function_entity in self.function_entity:
             function_entity.clear_node()
+        temp = self.node
         self.node = self.node.text.decode('utf-8').split('\n')
+        if temp.start_point[0] == 1:
+            self.node.insert(0, '') 
 
     def clear_index(self):
         for class_entity in self.class_entity:
