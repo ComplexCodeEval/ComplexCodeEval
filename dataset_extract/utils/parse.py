@@ -153,7 +153,7 @@ def parse_java_method(method_entity, class_entity):
     method_entity.set_method_name(method_name)
     method_entity.set_left_context(method_node.start_point[0])
     method_entity.set_right_context(method_node.end_point[0]+1)
-    if method_node.prev_sibling and method_node.prev_sibling.type == "comment":
+    if method_node.prev_sibling and method_node.prev_sibling.type == "block_comment":
         comment_node = method_node.prev_sibling
         comment = tuple((comment_node.start_point[0], comment_node.end_point[0]+1))
         method_entity.set_comment(comment)
@@ -195,7 +195,7 @@ def parse_java_class(class_entity, file_entity):
     class_entity.set_belong_file(file_entity)
     class_name = class_node.child_by_field_name("name").text.decode("utf-8")
     class_entity.set_class_name(class_name)
-    if class_node.prev_sibling and class_node.prev_sibling.type == "comment":
+    if class_node.prev_sibling and class_node.prev_sibling.type == "block_comment":
         comment = class_node.prev_sibling.text.decode("utf-8")
         class_entity.set_comment(comment)
     class_interface = class_node.child_by_field_name("interfaces")
