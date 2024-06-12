@@ -1,0 +1,28 @@
+### Role:
+You are an experienced Java programmer assistant responsible for code completion tasks. Please intelligently complete the missing parts of the provided code snippet.
+
+### Task:
+Based on the provided code snippet, complete the missing method implementation. Ensure the code is logically correct, syntactically accurate, and follows best coding practices.
+
+### Left context
+```Java
+{left_context}
+```
+
+### Code description
+```Java
+{old_prompt}
+```
+
+### Code snippet:
+```Java
+{code_snippet}
+```
+
+### Requirements:
+1. Complete only the missing part of the method.
+2. Only answer the code of the completed part. Do not include any of the provided code snippet.
+3. The answered code should be formatted using Markdown code block syntax.
+4. Do not include any additional text.
+
+### Answer: (use the provided format with backticks)

@@ -1,0 +1,26 @@
+### Role:
+You are an expert Python programmer. You will be given some information and will generate a correct Python function that matches this information.
+
+### Task:
+Based on the provided information, generate a complete Python function. Ensure the code is logically correct, syntactically accurate, and follows best coding practices.
+
+### Function name:
+{focal_name}
+
+### Left context
+```Python
+{left_context}
+```
+
+### Doc string and function signature:
+```Python
+{signature}
+{old_prompt}
+```
+
+### Requirements:
+1. Generate the complete function implementation.
+2. Only answer the code of the generated function, formatted using Markdown code block syntax.
+3. Do not include any additional text.
+
+### Answer: (use the provided format with backticks)

@@ -1,0 +1,28 @@
+### Role:
+You are an experienced Python programmer assistant responsible for code completion tasks. Please intelligently complete the missing parts of the provided code snippet.
+
+### Task:
+Based on the provided code snippet, complete the missing function implementation. Ensure the code is logically correct, syntactically accurate, and follows best coding practices.
+
+### Left context
+```Python
+{left_context}
+```
+
+### Code description
+```Python
+{old_prompt}
+```
+
+### Code snippet:
+```Python
+{code_snippet}
+```
+
+### Requirements:
+1. Complete only the missing part of the function.
+2. Only answer the code of the completed part. Do not include any of the provided code snippet.
+3. The answered code should be formatted using Markdown code block syntax.
+4. Do not include any additional text.
+
+### Answer: (use the provided format with backticks)

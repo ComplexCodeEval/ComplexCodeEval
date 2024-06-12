@@ -1,0 +1,26 @@
+### Role:
+You are an expert Java programmer. You will be given some information and will generate a correct Java method that matches this information.
+
+### Task:
+Based on the provided information, generate a complete Java method. Ensure the code is logically correct, syntactically accurate, and follows best coding practices.
+
+### Method name:
+{focal_name}
+
+### Left context
+```Java
+{left_context}
+```
+
+### Doc string and method signature:
+```Java
+{old_prompt}
+{signature}
+```
+
+### Requirements:
+1. Generate the complete method implementation.
+2. Only answer the code of the generated method, formatted using Markdown code block syntax.
+3. Do not include any additional text.
+
+### Answer: (use the provided format with backticks)
