@@ -86,7 +86,6 @@ The aim of this project is to crawl high-star GitHub projects, parse their depen
 
 Run the tool:
 ```sh
-cd ./dataset_extract  
 python3 -m dataset_extract  
 ```
 The final output will include a remote information dependency table generated in the `./analysis_repo_dependency` directory, the downloaded remote repositories stored in the `./repositories` directory, the API call details for each framework (package) generated in the `./csv_files` directory, and the final dataset for each framework (package) generated in the `./json_files` directory.
