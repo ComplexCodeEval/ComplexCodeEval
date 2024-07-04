@@ -8,7 +8,7 @@ java_data = []
 with open(json_data_path, 'r', encoding='utf-8') as f:
     java_data = json.load(f)
 
-LANGUAGE = Language('/data/jfeng/ComplexCodeEval/benchmark_construct/dataset_extract/parser/my-languages.so', 'java')
+LANGUAGE = Language('./dataset_extract/parser/my-languages.so', 'java')
 parser = Parser()
 parser.set_language(LANGUAGE)
 
