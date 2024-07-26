@@ -74,6 +74,10 @@ The aim of this project is to crawl high-star GitHub projects, parse their depen
         "node_id": "MDc6TGljZW5zZTE="
       }`
 
+### An Example of samples
+
+![sample_example](../figures/sample_example.png)
+
 ### Key Features
 
 - Crawl high-star GitHub projects and analyze their dependencies.
@@ -93,6 +97,10 @@ The final output will include a remote information dependency table generated in
 ### Configuration File
 
 The configuration file can be customized at [setup/profile.yaml](setup/profile.yaml).
+
+### Prompt used to Generate docstring
+
+![prompt_template](../figures/prompt_template.png)
 
 ### Notes
 
