@@ -37,3 +37,8 @@ Each sample in ComplexCodeEval includes various annotations:
 - Docstrings
 - Multiple timestamps (project creation time, file creation time, and function update time)
 - ...
+
+### Performance
+
+The following are the experimental results of using CodeBERTScore to replace CodeBLEU and BLEU.
+![CodeBERTScore](./figures/CodeBERTScore.png)
