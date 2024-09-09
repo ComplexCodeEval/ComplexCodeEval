@@ -1,0 +1,221 @@
+API:
+  - name: requests  
+    accept:  
+      - requests  
+    reject: []  
+  - name: numpy  
+    accept:  
+      - numpy  
+    reject: []  
+  - name: pandas  
+    accept:  
+      - pandas  
+    reject: []  
+  - name: Django  
+    accept:  
+      - django  
+    reject: []  
+  - name: Flask  
+    accept:  
+      - flask  
+    reject: []  
+  - name: scikit-learn  
+    accept:  
+      - sklearn  
+    reject: []  
+  - name: matplotlib  
+    accept:  
+      - matplotlib  
+    reject: []  
+  - name: SQLAlchemy  
+    accept:  
+      - sqlalchemy  
+    reject: []  
+  - name: torch  
+    accept:  
+      - torch  
+    reject: []
+  - name: tqdm  
+    accept:  
+      - tqdm  
+    reject: []  
+  - name: chardet  
+    accept:  
+      - chardet  
+    reject: []  
+  - name: Werkzeug  
+    accept:  
+      - werkzeug  
+    reject: []  
+  - name: joblib  
+    accept:  
+      - joblib  
+    reject: []
+  - name: opencv-python  
+    accept:  
+      - cv2  
+    reject: []  
+  - name: Scrapy  
+    accept:  
+      - scrapy  
+    reject: []  
+  - name: scikit-image  
+    accept:  
+      - skimage  
+    reject: []  
+  - name: djangorestframework  
+    accept:  
+      - rest_framework  
+    reject: []  
+  - name: Cython  
+    accept:  
+      - Cython  
+    reject: []  
+  - name: notebook  #工具
+    accept:  
+      - notebook  
+    reject: []  
+  - name: peewee  
+    accept:  
+      - peewee  
+    reject: []  
+  - name: seaborn  
+    accept:  
+      - seaborn  
+    reject: []  
+  - name: packaging  
+    accept:  
+      - packaging  
+    reject: []  
+  - name: h5py  
+    accept:  
+      - h5py  
+    reject: []  
+  - name: celery  
+    accept:  
+      - celery  
+    reject: []  
+  - name: sympy  
+    accept:  
+      - sympy  
+    reject: []
+  - name: fastapi  
+    accept:  
+      - fastapi  
+    reject: []  
+  - name: boto3  
+    accept:  
+      - boto3  
+    reject: []  
+  - name: redis  
+    accept:  
+      - redis 
+  - name: scipy  
+    accept:  
+      - scipy  
+    reject: []  
+  - name: IPython  # 命令行交互工具
+    accept:  
+      - IPython  
+    reject: []  
+  - name: Jinja2  
+    accept:  
+      - jinja2  
+    reject: []
+  - name: networkx  
+    accept:  
+      - networkx  
+    reject: []  
+  - name: aiohttp  
+    accept:  
+      - aiohttp  
+    reject: []  
+  - name: attrs  #m
+    accept:  
+      - attr  
+    reject: []  
+  - name: mypy  # 静态类型检查工具
+    accept:  
+      - mypy  
+    reject: []  
+  - name: coverage  # 测试覆盖率工具
+    accept:  
+      - coverage  
+    reject: []  
+  - name: PyYAML  #m
+    accept:  
+      - yaml  
+    reject: []
+  - name: transformers  
+    accept:  
+      - transformers  
+    reject: []  
+  - name: pyspark  
+    accept:  
+      - pyspark  
+    reject: []
+  - name: grpcio  #m
+    accept:  
+      - grpc
+    reject: []  
+  - name: pydantic  
+    accept:  
+      - pydantic  
+    reject: []  
+  - name: marshmallow  
+    accept:  
+      - marshmallow  
+    reject: []  
+  - name: pybind11  #工具
+    accept:  
+      - pybind11  
+    reject: []  
+  - name: moto  
+    accept:  
+      - moto  
+    reject: []  
+  - name: sqlparse  
+    accept:  
+      - sqlparse  
+    reject: []  
+  - name: bokeh  
+    accept:  
+      - bokeh  
+    reject: []  
+  - name: freezegun  
+    accept:  
+      - freezegun  
+    reject: []  
+  - name: sanic  
+    accept:  
+      - sanic  
+    reject: []  
+  - name: geopy  
+    accept:  
+      - geopy  
+    reject: []  
+  - name: ujson  
+    accept:  
+      - ujson  
+    reject: []  
+  - name: dask  
+    accept:  
+      - dask  
+    reject: []  
+  - name: selenium  
+    accept:  
+      - selenium  
+    reject: []  
+  - name: loguru  
+    accept:  
+      - loguru  
+    reject: []  
+  - name: nose  
+    accept:  
+      - nose  
+    reject: []  
+  - name: PyGithub  
+    accept:  
+      - github 
+    reject: []
+#The API you want to analyze, you can add more APIs in the list. The 'accept' field is the package name of the API you want to analyze, and the 'reject' field is the package name you want to exclude.

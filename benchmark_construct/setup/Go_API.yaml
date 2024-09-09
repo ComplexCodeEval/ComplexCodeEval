@@ -1,0 +1,402 @@
+API:
+  - name: github.com/stretchr/testify
+    accept: 
+      - github.com/stretchr/testify
+    reject: []
+  - name: gopkg.in/yaml.v2
+    accept: 
+      - gopkg.in/yaml.v2
+    reject: []
+  - name: github.com/golang/protobuf
+    accept: 
+      - github.com/golang/protobuf
+    reject: []
+  - name: github.com/davecgh/go-spew
+    accept: 
+      - github.com/davecgh/go-spew
+    reject: []
+  - name: golang.org/x/tools
+    accept: 
+      - golang.org/x/tools
+    reject: []
+  - name: google.golang.org/grpc
+    accept: 
+      - google.golang.org/grpc
+    reject: []
+  - name: gopkg.in/yaml.v3
+    accept: 
+      - gopkg.in/yaml.v3
+    reject: []
+  - name: github.com/google/uuid
+    accept: 
+      - github.com/google/uuid
+    reject: []
+  - name: google.golang.org/protobuf
+    accept: 
+      - google.golang.org/protobuf
+    reject: []
+  - name: github.com/spf13/cobra
+    accept: 
+      - github.com/spf13/cobra
+    reject: []
+  - name: golang.org/x/sys
+    accept: 
+      - golang.org/x/sys
+    reject: []
+  - name: github.com/docker/docker
+    accept: 
+      - github.com/docker/docker
+    reject: []
+  - name: golang.org/x/net
+    accept: 
+      - golang.org/x/net
+    reject: []
+  - name: github.com/pkg/errors
+    accept: 
+      - github.com/pkg/errors
+    reject: []
+  - name: gorm.io/gorm
+    accept: 
+      - gorm.io/gorm
+    reject: []
+  - name: github.com/google/go-cmp
+    accept: 
+      - github.com/google/go-cmp
+    reject: []
+  - name: github.com/gin-gonic/gin
+    accept: 
+      - github.com/gin-gonic/gin
+    reject: []
+  - name: github.com/spf13/pflag
+    accept: 
+      - github.com/spf13/pflag
+    reject: []
+  - name: github.com/pmezard/go-difflib
+    accept: 
+      - github.com/pmezard/go-difflib
+    reject: []
+  - name: golang.org/x/sync
+    accept: 
+      - golang.org/x/sync
+    reject: []
+  - name: github.com/sirupsen/logrus
+    accept: 
+      - github.com/sirupsen/logrus
+    reject: []
+  - name: golang.org/x/text
+    accept: 
+      - golang.org/x/text
+    reject: []
+  - name: golang.org/x/crypto
+    accept: 
+      - golang.org/x/crypto
+    reject: []
+  - name: github.com/mattn/go-sqlite3
+    accept: 
+      - github.com/mattn/go-sqlite3
+    reject: []
+  - name: github.com/shopspring/decimal
+    accept: 
+      - github.com/shopspring/decimal
+    reject: []
+  - name: github.com/russross/blackfriday/v2
+    accept: 
+      - github.com/russross/blackfriday/v2
+    reject: []
+  - name: github.com/emirpasic/gods
+    accept: 
+      - github.com/emirpasic/gods
+    reject: []
+  - name: github.com/emicklei/go-restful/v3
+    accept: 
+      - github.com/emicklei/go-restful/v3
+    reject: []
+  - name: go.etcd.io/etcd/api/v3
+    accept: 
+      - go.etcd.io/etcd/api/v3
+    reject: []
+  - name: github.com/klauspost/compress
+    accept: 
+      - github.com/klauspost/compress
+    reject: []
+  - name: go.opentelemetry.io/otel/trace
+    accept: 
+      - go.opentelemetry.io/otel/trace
+    reject: []
+  - name: github.com/gorilla/websocket
+    accept: 
+      - github.com/gorilla/websocket
+    reject: []
+  - name: github.com/golang/glog
+    accept: 
+      - github.com/golang/glog
+    reject: []
+  - name: k8s.io/client-go
+    accept: 
+      - k8s.io/client-go
+    reject: []
+  - name: go.etcd.io/etcd/client/v3
+    accept: 
+      - go.etcd.io/etcd/client/v3
+    reject: []
+  - name: github.com/jmoiron/sqlx
+    accept: 
+      - github.com/jmoiron/sqlx
+    reject: []
+  - name: github.com/cenkalti/backoff/v4
+    accept: 
+      - github.com/cenkalti/backoff/v4
+    reject: []
+  - name: github.com/docker/distribution
+    accept: 
+      - github.com/docker/distribution
+    reject: []
+  - name: github.com/miekg/dns
+    accept: 
+      - github.com/miekg/dns
+    reject: []
+  - name: cloud.google.com/go/compute/metadata
+    accept: 
+      - cloud.google.com/go/compute/metadata
+    reject: []
+  - name: cloud.google.com/go/compute
+    accept: 
+      - cloud.google.com/go/compute
+    reject: []
+  - name: cloud.google.com/go
+    accept: 
+      - cloud.google.com/go
+    reject: []
+  - name: github.com/opencontainers/runc
+    accept: 
+      - github.com/opencontainers/runc
+    reject: []
+  - name: github.com/containerd/containerd
+    accept: 
+      - github.com/containerd/containerd
+    reject: []
+  - name: github.com/ethereum/go-ethereum
+    accept: 
+      - github.com/ethereum/go-ethereum
+    reject: []
+  - name: gopkg.in/natefinch/lumberjack.v2
+    accept: 
+      - gopkg.in/natefinch/lumberjack.v2
+    reject: []
+  - name: github.com/BurntSushi/toml
+    accept: 
+      - github.com/BurntSushi/toml
+    reject: []
+  - name: github.com/go-sql-driver/mysql
+    accept: 
+      - github.com/go-sql-driver/mysql
+    reject: []
+  - name: google.golang.org/genproto
+    accept: 
+      - google.golang.org/genproto
+    reject: []
+  - name: github.com/coreos/etcd
+    accept: 
+      - github.com/coreos/etcd
+    reject: []
+  - name: github.com/gorilla/mux
+    accept: 
+      - github.com/gorilla/mux
+    reject: []
+  - name: github.com/aws/aws-sdk-go
+    accept: 
+      - github.com/aws/aws-sdk-go
+    reject: []
+  - name: cloud.google.com/go/storage
+    accept: 
+      - cloud.google.com/go/storage
+    reject: []
+  - name: github.com/joho/godotenv
+    accept: 
+      - github.com/joho/godotenv
+    reject: []
+  - name: github.com/gopherjs/gopherjs
+    accept: 
+      - github.com/gopherjs/gopherjs
+    reject: []
+  - name: github.com/andybalholm/brotli
+    accept: 
+      - github.com/andybalholm/brotli
+    reject: []
+  - name: github.com/jinzhu/now
+    accept: 
+      - github.com/jinzhu/now
+    reject: []
+  - name: github.com/evanphx/json-patch
+    accept: 
+      - github.com/evanphx/json-patch
+    reject: []
+  - name: github.com/urfave/cli/v2
+    accept: 
+      - github.com/urfave/cli/v2
+    reject: []
+  - name: github.com/rivo/uniseg
+    accept: 
+      - github.com/rivo/uniseg
+    reject: []
+  - name: github.com/onsi/ginkgo/v2
+    accept: 
+      - github.com/onsi/ginkgo/v2
+    reject: []
+  - name: github.com/hashicorp/golang-lru
+    accept: 
+      - github.com/hashicorp/golang-lru
+    reject: []
+  - name: github.com/bytedance/sonic
+    accept: 
+      - github.com/bytedance/sonic
+    reject: []
+  - name: github.com/aws/aws-sdk-go-v2
+    accept: 
+      - github.com/aws/aws-sdk-go-v2
+    reject: []
+  - name: go.opentelemetry.io/otel/sdk
+    accept: 
+      - go.opentelemetry.io/otel/sdk
+    reject: []
+  - name: cloud.google.com/go/iam
+    accept: 
+      - cloud.google.com/go/iam
+    reject: []
+  - name: github.com/dgrijalva/jwt-go
+    accept: 
+      - github.com/dgrijalva/jwt-go
+    reject: []
+  - name: github.com/dustin/go-humanize
+    accept: 
+      - github.com/dustin/go-humanize
+    reject: []
+  - name: github.com/tidwall/gjson
+    accept: 
+      - github.com/tidwall/gjson
+    reject: []
+  - name: gopkg.in/ini.v1
+    accept: 
+      - gopkg.in/ini.v1
+    reject: []
+  - name: github.com/lib/pq
+    accept: 
+      - github.com/lib/pq
+    reject: []
+  - name: github.com/prometheus/client_golang
+    accept: 
+      - github.com/prometheus/client_golang
+    reject: []
+  - name: github.com/urfave/cli
+    accept: 
+      - github.com/urfave/cli
+    reject: []
+  - name: github.com/pelletier/go-toml/v2
+    accept: 
+      - github.com/pelletier/go-toml/v2
+    reject: []
+  - name: github.com/mitchellh/mapstructure
+    accept: 
+      - github.com/mitchellh/mapstructure
+    reject: []
+  - name: github.com/hashicorp/go-version
+    accept: 
+      - github.com/hashicorp/go-version
+    reject: []
+  - name: github.com/hashicorp/go-plugin
+    accept: 
+      - github.com/hashicorp/go-plugin
+    reject: []
+  - name: github.com/shirou/gopsutil
+    accept: 
+      - github.com/shirou/gopsutil
+    reject: []
+  - name: go.uber.org/zap
+    accept: 
+      - go.uber.org/zap
+    reject: []
+  - name: github.com/go-logr/logr
+    accept: 
+      - github.com/go-logr/logr
+    reject: []
+  - name: github.com/fatih/color
+    accept: 
+      - github.com/fatih/color
+    reject: []
+  - name: google.golang.org/api
+    accept: 
+      - google.golang.org/api
+    reject: []
+  - name: github.com/fsnotify/fsnotify
+    accept: 
+      - github.com/fsnotify/fsnotify
+    reject: []
+  - name: github.com/aws/aws-sdk-go-v2/config
+    accept: 
+      - github.com/aws/aws-sdk-go-v2/config
+    reject: []
+  - name: github.com/hashicorp/hcl
+    accept: 
+      - github.com/hashicorp/hcl
+    reject: []
+  - name: github.com/valyala/fasthttp
+    accept: 
+      - github.com/valyala/fasthttp
+    reject: []
+  - name: github.com/rs/cors
+    accept: 
+      - github.com/rs/cors
+    reject: []
+  - name: github.com/satori/go.uuid
+    accept: 
+      - github.com/satori/go.uuid
+    reject: []
+  - name: github.com/google/btree
+    accept: 
+      - github.com/google/btree
+    reject: []
+  - name: github.com/spf13/afero
+    accept: 
+      - github.com/spf13/afero
+    reject: []
+  - name: github.com/spf13/cast
+    accept: 
+      - github.com/spf13/cast
+    reject: []
+  - name: github.com/golang-jwt/jwt/v4
+    accept: 
+      - github.com/golang-jwt/jwt/v4
+    reject: []
+  - name: github.com/cespare/xxhash/v2
+    accept: 
+      - github.com/cespare/xxhash/v2
+    reject: []
+  - name: github.com/rs/zerolog
+    accept: 
+      - github.com/rs/zerolog
+    reject: []
+  - name: github.com/gogo/protobuf
+    accept: 
+      - github.com/gogo/protobuf
+    reject: []
+  - name: golang.org/x/oauth2
+    accept: 
+      - golang.org/x/oauth2
+    reject: []
+  - name: github.com/grpc-ecosystem/grpc-gateway
+    accept: 
+      - github.com/grpc-ecosystem/grpc-gateway
+    reject: []
+  - name: github.com/grpc-ecosystem/grpc-gateway/v2
+    accept: 
+      - github.com/grpc-ecosystem/grpc-gateway/v2
+    reject: []
+  - name: github.com/docker/cli
+    accept: 
+      - github.com/docker/cli
+    reject: []
+  - name: github.com/spf13/viper
+    accept: 
+      - github.com/spf13/viper
+    reject: []
+#The API you want to analyze, you can add more APIs in the list. The 'accept' field is the package name of the API you want to analyze, and the 'reject' field is the package name you want to exclude.

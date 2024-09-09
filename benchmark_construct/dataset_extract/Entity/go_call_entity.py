@@ -1,12 +1,14 @@
-# python call entity
-
-
-class pythonCallEntity:
+class goCallEntity:
     def __init__(self, node):
         self.node = node
-        self.call_api = None
-        self.parameter = None
+        self.call_api = ""
         self.belong_function = None
+        self.parameters = None
+
+    def show(self):
+        print("--->Call: " + self.call_api)
+        for item in self.__dict__:
+            print(item, self.__dict__[item])
 
     def clear_node(self):
         self.node = None
@@ -20,23 +22,23 @@ class pythonCallEntity:
         class_dict.pop("belong_function", None)
         return class_dict
 
-    def set_parameter(self, parameter):
-        self.parameter = parameter
+    def set_call_api(self, call_api):
+        self.call_api = call_api
 
     def set_belong_function(self, belong_function):
         self.belong_function = belong_function
 
-    def set_call_api(self, call_api):
-        self.call_api = call_api
+    def set_parameter(self, parameter):
+        self.parameters = parameter
 
     def get_node(self):
         return self.node
 
-    def get_parameter_entity(self):
-        return self.parameter
+    def get_call_api(self):
+        return self.call_api
 
     def get_belong_function(self):
         return self.belong_function
 
-    def get_call_api(self):
-        return self.call_api
+    def get_parameter(self):
+        return self.parameters

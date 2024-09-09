@@ -1,13 +1,16 @@
 # 当两组api的结果相似度超过一半时，删除其中一组api的结果
 
+
 def compare_result(result1, result2):
-    if (result1["git_group"] == result2["git_group"] and
-            result1["git_name"] == result2["git_name"] and
-            result1["version"] == result2["version"] and
-            result1["project_name"] == result2["project_name"] and
-            result1["file_path"] == result2["file_path"] and
-            result1["focal_class"] == result2["focal_class"] and
-            result1["focal_name"] == result2["focal_name"]):
+    if (
+        result1["git_group"] == result2["git_group"]
+        and result1["git_name"] == result2["git_name"]
+        and result1["version"] == result2["version"]
+        and result1["project_name"] == result2["project_name"]
+        and result1["file_path"] == result2["file_path"]
+        and result1["focal_class"] == result2["focal_class"]
+        and result1["focal_name"] == result2["focal_name"]
+    ):
         return True
     else:
         return False

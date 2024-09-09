@@ -1,5 +1,6 @@
 # java call method entity
 
+
 class callMethodEntity:
     def __init__(self, node):
         self.node = node
@@ -19,10 +20,10 @@ class callMethodEntity:
 
     def to_dict(self):
         class_dict = self.__dict__.copy()
-        class_dict.pop('node', None)
-        class_dict.pop('belong_method', None)
+        class_dict.pop("node", None)
+        class_dict.pop("belong_method", None)
         parameter_entity = [entity.to_dict() for entity in self.parameter_entity]
-        class_dict['parameter_entity'] = parameter_entity
+        class_dict["parameter_entity"] = parameter_entity
         return class_dict
 
     def set_call_method_name(self, call_method_name):

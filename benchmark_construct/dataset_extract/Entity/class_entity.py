@@ -1,4 +1,5 @@
-#java class entity
+# java class entity
+
 
 class classEntity:
     def __init__(self, node):
@@ -33,14 +34,14 @@ class classEntity:
 
     def to_dict(self):
         class_dict = self.__dict__.copy()
-        class_dict.pop('node', None)
+        class_dict.pop("node", None)
         class_dict.pop("belong_file", None)
         method_entity = [entity.to_dict() for entity in self.method_entity]
         class_entity = [entity.to_dict() for entity in self.class_entity]
         variable_entity = [entity.to_dict() for entity in self.variable_entity]
-        class_dict['method_entity'] = method_entity
-        class_dict['class_entity'] = class_entity
-        class_dict['variable_entity'] = variable_entity
+        class_dict["method_entity"] = method_entity
+        class_dict["class_entity"] = class_entity
+        class_dict["variable_entity"] = variable_entity
         return class_dict
 
     def set_class_name(self, class_name):

@@ -1,10 +1,15 @@
 # parameter entity
 
+
 class parameterEntity:
     def __init__(self, node):
         self.node = node
         self.parameter_name = None
         self.parameter_type = None
+
+    def show(self):
+        print("--->Parameter: " + self.parameter_name)
+        print(self.to_dict())
 
     def clear_node(self):
         self.node = None
@@ -14,7 +19,7 @@ class parameterEntity:
 
     def to_dict(self):
         class_dict = self.__dict__.copy()
-        class_dict.pop('node', None)
+        class_dict.pop("node", None)
         return class_dict
 
     def set_parameter_name(self, parameter_name):

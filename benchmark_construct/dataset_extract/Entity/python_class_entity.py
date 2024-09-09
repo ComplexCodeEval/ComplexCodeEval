@@ -1,5 +1,6 @@
 # python class entity
 
+
 class pythonClassEntity:
     def __init__(self, node):
         self.node = node
@@ -14,7 +15,7 @@ class pythonClassEntity:
         for function_entity in self.function_entity:
             function_entity.clear_node()
         self.node = None
-    
+
     def clear_index(self):
         for function_entity in self.function_entity:
             function_entity.clear_index()
@@ -22,10 +23,10 @@ class pythonClassEntity:
 
     def to_dict(self):
         class_dict = self.__dict__.copy()
-        class_dict.pop('node', None)
-        class_dict.pop('belong_file', None)
+        class_dict.pop("node", None)
+        class_dict.pop("belong_file", None)
         function_entity = [entity.to_dict() for entity in self.function_entity]
-        class_dict['function_entity'] = function_entity
+        class_dict["function_entity"] = function_entity
         return class_dict
 
     def set_class_name(self, class_name):

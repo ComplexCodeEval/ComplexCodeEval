@@ -1,5 +1,6 @@
 # file entity
 
+
 class fileEntity:
     def __init__(self, node):
         self.node = node
@@ -13,32 +14,45 @@ class fileEntity:
         self.is_test_file = False
         self.module_name = None
 
-    def clear_node(self):
+    def show(self):
+        print("--->File: " + self.file_name)
+        for item in self.__dict__:
+            print(item, self.__dict__[item])
         for class_entity in self.class_entity:
-            class_entity.clear_node()
+            class_entity.show()
         for function_entity in self.function_entity:
-            function_entity.clear_node()
+            function_entity.show()
+
+    def clear_node(self):
+        if self.class_entity:
+            for class_entity in self.class_entity:
+                class_entity.clear_node()
+        if self.function_entity:
+            for function_entity in self.function_entity:
+                function_entity.clear_node()
         temp = self.node
-        self.node = self.node.text.decode('utf-8').split('\n')
+        self.node = self.node.text.decode("utf-8").split("\n")
         if temp.start_point[0] == 1:
-            self.node.insert(0, '') 
+            self.node.insert(0, "")
 
     def clear_index(self):
-        for class_entity in self.class_entity:
-            class_entity.clear_index()
-        for function_entity in self.function_entity:
-            function_entity.clear_index()
+        if self.class_entity:
+            for class_entity in self.class_entity:
+                class_entity.clear_index()
+        if self.function_entity:
+            for function_entity in self.function_entity:
+                function_entity.clear_index()
         self.variables = None
         self.class_entity = None
         self.function_entity = None
 
     def to_dict(self):
         class_dict = self.__dict__.copy()
-        class_dict.pop('node', None)
+        class_dict.pop("node", None)
         class_entity = [entity.to_dict() for entity in self.class_entity]
         function_entity = [entity.to_dict() for entity in self.function_entity]
-        class_dict['class_entity'] = class_entity
-        class_dict['function_entity'] = function_entity
+        class_dict["class_entity"] = class_entity
+        class_dict["function_entity"] = function_entity
         return class_dict
 
     def set_file_name(self, file_name):

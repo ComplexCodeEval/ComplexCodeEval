@@ -1,5 +1,6 @@
 # java method entity
 
+
 class methodEntity:
     def __init__(self, node):
         self.node = node
@@ -23,7 +24,7 @@ class methodEntity:
         for call_method in self.call_method:
             call_method.clear_node()
         self.node = None
-    
+
     def clear_index(self):
         for parameter_entity in self.parameter_entity:
             parameter_entity.clear_index()
@@ -34,14 +35,14 @@ class methodEntity:
 
     def to_dict(self):
         class_dict = self.__dict__.copy()
-        class_dict.pop('node', None)
-        class_dict.pop('belong_class', None)
+        class_dict.pop("node", None)
+        class_dict.pop("belong_class", None)
         parameter_entity = [entity.to_dict() for entity in self.parameter_entity]
         variable_entity = [entity.to_dict() for entity in self.variable_entity]
         call_method = [entity.to_dict() for entity in self.call_method]
-        class_dict['parameter_entity'] = parameter_entity
-        class_dict['variable_entity'] = variable_entity
-        class_dict['call_method'] = call_method
+        class_dict["parameter_entity"] = parameter_entity
+        class_dict["variable_entity"] = variable_entity
+        class_dict["call_method"] = call_method
         return class_dict
 
     def set_method_name(self, method_name):
@@ -87,7 +88,7 @@ class methodEntity:
         if self.comment is None:
             return None
         file_context = self.belong_class.belong_file.node
-        return '\n'.join(file_context[self.comment[0]:self.comment[1]])
+        return "\n".join(file_context[self.comment[0] : self.comment[1]])
 
     def get_annotation(self):
         return self.annotation
@@ -109,15 +110,15 @@ class methodEntity:
 
     def get_code(self):
         file_context = self.belong_class.belong_file.node
-        return '\n'.join(file_context[self.left_context:self.right_context])
+        return "\n".join(file_context[self.left_context : self.right_context])
 
     def get_right_context(self):
         file_context = self.belong_class.belong_file.node
-        return '\n'.join(file_context[self.right_context:])
+        return "\n".join(file_context[self.right_context :])
 
     def get_left_context(self):
         file_context = self.belong_class.belong_file.node
-        return '\n'.join(file_context[:self.left_context])
+        return "\n".join(file_context[: self.left_context])
 
     def get_method_signature(self):
         return self.method_signature

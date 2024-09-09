@@ -1,0 +1,292 @@
+API:
+  - name: Spring
+    accept:
+      - org.springframework
+    reject:
+      - org.springframework.boot
+      - org.springframework.test
+  - name: Gson
+    accept:
+      - com.google.gson
+    reject: []
+  - name: Fastjson
+    accept:
+      - com.alibaba.fastjson
+    reject: []
+  - name: Log4j
+    accept:
+      - org.apache.logging.log4j
+      - org.apache.log4j
+    reject: []
+  - name: Swagger
+    accept:
+      - io.swagger
+    reject: []
+  - name: Apache_POI
+    accept:
+      - org.apache.poi
+    reject: []
+  - name: Prometheus
+    accept:
+      - io.prometheus
+    reject: []
+  - name: Micrometer_Core
+    accept:
+      - io.micrometer.core
+    reject: []
+  - name: Alibaba_Nacos
+    accept:
+      - com.alibaba.nacos
+    reject: []
+  - name: Java_JWT
+    accept:
+      - com.auth0.jwt
+    reject: []
+  - name: Nimbus_JOSE_JWT
+    accept:
+      - com.nimbusds.jose
+      - com.nimbusds.jwt
+    reject: []
+  - name: RabbitMQ
+    accept:
+      - com.rabbitmq
+    reject: []
+  - name: Hazelcast
+    accept:
+      - com.hazelcast
+    reject: []
+  - name: Apache_Kafka
+    accept:
+      - org.apache.kafka
+    reject: []
+  - name: MariaDB
+    accept:
+      - org.mariadb.jdbc
+    reject: []
+  - name: MyBatis
+    accept:
+      - org.apache.ibatis
+    reject: []
+  - name: Hibernate_Validator
+    accept:
+      - org.hibernate.validator
+    reject: []
+  - name: Elasticsearch
+    accept:
+      - org.elasticsearch
+      - co.elastic.clients.elasticsearch
+    reject: []
+  - name: Redis
+    accept:
+      - redis.clients
+    reject: []
+  - name: Redisson
+    accept:
+      - org.redisson
+    reject: []
+  - name: Caffeine
+    accept:
+      - com.github.benmanes.caffeine
+    reject: []
+  - name: Druid
+    accept:
+      - com.alibaba.druid
+      - io.druid
+    reject: []
+  - name: MongoDB
+    accept:
+      - org.bson
+      - com.mongodb
+    reject: []
+  - name: Curator_Recipes
+    accept:
+      - org.apache.curator
+    reject: []
+  - name: Bouncy_Castle
+    accept:
+      - org.bouncycastle
+    reject: []
+  - name: Jasypt_Spring_Boot
+    accept:
+      - org.jasypt
+    reject: []
+  - name: Jakarta_XML_Bind
+    accept:
+      - jakarta.xml.bind
+    reject: []
+  - name: Commons_Text
+    accept:
+      - org.apache.commons.text
+    reject: []
+  - name: Commons_FileUpload
+    accept:
+      - org.apache.commons.fileupload
+    reject: []
+  - name: HttpCore
+    accept:
+      - org.apache.http
+    reject: []
+  - name: Apache_Commons
+    accept:
+      - org.apache.commons
+    reject: []
+  - name: Guava
+    accept:
+      - com.google.common
+    reject: []
+  - name: Commons_Pool2
+    accept:
+      - org.apache.commons.pool2
+    reject: []
+  - name: SnakeYAML
+    accept:
+      - org.yaml.snakeyaml
+    reject: []
+  - name: Jaxen
+    accept:
+      - org.jaxen
+    reject: []
+  - name: Java_XMLBuilder
+    accept:
+      - com.jamesmurty.utils
+    reject: []
+  - name: FreeMarker
+    accept:
+      - freemarker
+    reject: []
+  - name: Jsoup
+    accept:
+      - org.jsoup
+    reject: []
+  - name: Dom4j
+    accept:
+      - org.dom4j
+    reject: []
+  - name: Jackson
+    accept:
+      - com.fasterxml.jackson
+    reject: []
+  - name: org_json
+    accept:
+      - org.json
+    reject: []
+  - name: JSON_Sanitizer
+    accept:
+      - com.google.json
+    reject: []
+  - name: JSON_Smart
+    accept:
+      - net.minidev.json
+    reject: []
+  - name: Commons_Codec
+    accept:
+      - org.apache.commons.codec
+    reject: []
+  - name: Protostuff
+    accept:
+      - io.protostuff
+    reject: []
+  - name: Byte_Buddy
+    accept:
+      - net.bytebuddy
+    reject: []
+  - name: Protobuf_Java
+    accept:
+      - com.google.protobuf
+    reject: []
+  - name: CGLIB
+    accept:
+      - net.sf.cglib
+    reject: []
+  - name: ExpiringMap
+    accept:
+      - net.jodah.expiringmap
+      - org.apache.mina.util.ExpiringMap
+    reject: []
+  - name: Kotlin_Stdlib
+    accept:
+      - org.jetbrains.kotlin
+    reject: []
+  - name: Groovy
+    accept:
+      - groovy
+      - org.apache.groovy
+      - org.codehaus.groovy
+    reject: []
+  - name: Resilience4j
+    accept:
+      - io.github.resilience4j
+    reject: []
+  - name: JavaParser
+    accept:
+      - com.github.javaparser
+    reject: []
+  - name: Okio
+    accept:
+      - okio
+    reject: []
+  - name: Zip4j
+    accept:
+      - net.lingala.zip4j
+    reject: []
+  - name: Snappy_Java
+    accept:
+      - org.xerial.snappy
+    reject: []
+  - name: AspectJRT
+    accept:
+      - org.aspectj
+    reject: []
+  - name: Lombok
+    accept:
+      - lombok
+    reject: []
+  - name: Reflections
+    accept:
+      - org.reflections
+    reject: []
+  - name: Transmittable_Thread_Local
+    accept:
+      - com.alibaba.ttl
+    reject: []
+  - name: Quartz_Scheduler
+    accept:
+      - org.quartz
+    reject: []
+  - name: OSHI
+    accept:
+      - oshi
+    reject: []
+  - name: JNA
+    accept:
+      - com.sun.jna
+    reject: []
+  - name: Apache_HttpComponents
+    accept:
+      - org.apache.http
+    reject: []
+  - name: Apache_Dubbo
+    accept:
+      - org.apache.dubbo
+      - io.grpc.reflection.v1alpha
+      - io.grpc.health.v1
+      - com.google.rpc
+      - com.alibaba.dubbo
+    reject: []
+  - name: OpenFeign
+    accept:
+      - feign
+    reject: []
+  - name: OkHttp
+    accept:
+      - okhttp3
+    reject: []
+  - name: Vert_x
+    accept:
+      - io.vertx
+    reject: []
+  - name: Netty
+    accept:
+      - io.netty
+    reject: []
+#The API you want to analyze, you can add more APIs in the list. The 'accept' field is the package name of the API you want to analyze, and the 'reject' field is the package name you want to exclude.

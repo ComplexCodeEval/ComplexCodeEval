@@ -1,5 +1,6 @@
 # python result entity
 
+
 class pythonResultEnity:
     def __init__(self):
         self.git_group = None
@@ -151,7 +152,7 @@ class pythonResultEnity:
 
     def get_is_gen_from_api(self):
         return self.prompt_is_gen_from_api
-    
+
     def get_comment(self):
         return self.comment
 
